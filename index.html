@@ -511,6 +511,116 @@ footer {
 .footer-social a:hover { color: rgba(255,255,255,0.7); }
 .footer-social svg { width: 18px; height: 18px; fill: currentColor; }
 
+/* ── SMS SIGNUP ── */
+.sms-section {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  text-align: center;
+}
+
+.sms-heading {
+  font-family: 'Changa One', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.sms-subtext {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  max-width: 420px;
+  margin: 0 auto 2.5rem;
+}
+
+.sms-form {
+  display: flex;
+  align-items: stretch;
+  max-width: 440px;
+  margin: 0 auto;
+  gap: 0;
+}
+
+.sms-prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-right: none;
+  color: rgba(255,255,255,0.5);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sms-input {
+  flex: 1;
+  padding: 0.95rem 1.2rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-right: none;
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  outline: none;
+  transition: border-color 0.25s, background 0.25s;
+  -webkit-appearance: none;
+}
+
+.sms-input::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+
+.sms-input:focus {
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.07);
+}
+
+.sms-btn {
+  padding: 0.95rem 1.6rem;
+  background: #fff;
+  color: #000;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid #fff;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+  white-space: nowrap;
+}
+
+.sms-btn:hover {
+  background: rgba(255,255,255,0.85);
+}
+
+.sms-success {
+  display: none;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-top: 1.5rem;
+}
+
+.sms-disclaimer {
+  margin-top: 1.2rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.18);
+  letter-spacing: 0.05em;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   nav { padding: 1.2rem 1.5rem; }
@@ -640,6 +750,21 @@ footer {
       We're always tuned in.
     </p>
     <a href="mailto:hello@circuit909.com" class="btn-primary">Send a Message</a>
+  </div>
+</section>
+
+<!-- SMS Signup -->
+<section class="content sms-section">
+  <div class="section-inner">
+    <h2 class="sms-heading">Stay in the Loop</h2>
+    <p class="sms-subtext">Drop your number and we'll text you every time there's a new event. No spam — just the music.</p>
+    <form class="sms-form" id="smsForm">
+      <span class="sms-prefix">+1</span>
+      <input class="sms-input" type="tel" id="phoneInput" placeholder="(555) 000-0000" maxlength="14" autocomplete="tel">
+      <button class="sms-btn" type="submit">Notify Me</button>
+    </form>
+    <p class="sms-success" id="smsSuccess">You're in. We'll keep you posted.</p>
+    <p class="sms-disclaimer">By submitting you agree to receive text messages from Circuit 909. Reply STOP to opt out.</p>
   </div>
 </section>
 
@@ -794,6 +919,30 @@ const revealObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll('[data-observe]').forEach(el => revealObs.observe(el));
+
+// ═══════════════════════════════════════════════
+//  SMS SIGNUP
+// ═══════════════════════════════════════════════
+const phoneInput = document.getElementById('phoneInput');
+const smsForm = document.getElementById('smsForm');
+const smsSuccess = document.getElementById('smsSuccess');
+
+phoneInput.addEventListener('input', () => {
+  let val = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+  if (val.length >= 7) val = `(${val.slice(0,3)}) ${val.slice(3,6)}-${val.slice(6)}`;
+  else if (val.length >= 4) val = `(${val.slice(0,3)}) ${val.slice(3)}`;
+  else if (val.length >= 1) val = `(${val}`;
+  phoneInput.value = val;
+});
+
+smsForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const digits = phoneInput.value.replace(/\D/g, '');
+  if (digits.length < 10) { phoneInput.style.borderColor = 'rgba(255,80,80,0.6)'; return; }
+  phoneInput.style.borderColor = '';
+  smsForm.style.display = 'none';
+  smsSuccess.style.display = 'block';
+});
 </script>
 </body>
 </html>
