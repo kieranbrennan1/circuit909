@@ -82,6 +82,229 @@ nav {
   gap: 1.2rem;
 }
 
+/* ── PROFILE BUTTON ── */
+.nav-profile-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  color: rgba(255,255,255,0.7);
+  transition: color 0.25s, border-color 0.25s;
+  position: relative;
+  padding: 0;
+}
+.nav-profile-btn:hover { color: #fff; border-color: rgba(255,255,255,0.7); }
+.nav-profile-btn svg { width: 16px; height: 16px; fill: currentColor; }
+.nav-profile-btn .initials {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0;
+}
+
+/* ── PROFILE DROPDOWN ── */
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.15);
+  min-width: 170px;
+  z-index: 300;
+  display: none;
+  flex-direction: column;
+}
+.profile-dropdown.open { display: flex; }
+.profile-dropdown-name {
+  padding: 0.9rem 1.2rem 0.5rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.profile-dropdown a,
+.profile-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1.2rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s, background 0.2s;
+  letter-spacing: 0.05em;
+}
+.profile-dropdown a:hover,
+.profile-dropdown button:hover { color: #fff; background: rgba(255,255,255,0.06); }
+
+/* ── AUTH MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+
+.auth-modal {
+  background: #0f0f0f;
+  border: 1px solid rgba(255,255,255,0.15);
+  width: 100%;
+  max-width: 400px;
+  padding: 2.5rem;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.3);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: #fff; }
+.auth-brand {
+  font-family: 'Changa One', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  margin-bottom: 1.8rem;
+  text-align: center;
+}
+.auth-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 1.8rem;
+  gap: 0;
+}
+.auth-tab-btn {
+  flex: 1;
+  padding: 0.7rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: rgba(255,255,255,0.35);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: -1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.auth-tab-btn.active { color: #fff; border-bottom-color: #fff; }
+.auth-panel { display: none; flex-direction: column; gap: 0.9rem; }
+.auth-panel.active { display: flex; }
+.auth-input {
+  padding: 0.85rem 1rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.25s;
+}
+.auth-input::placeholder { color: rgba(255,255,255,0.2); }
+.auth-input:focus { border-color: rgba(255,255,255,0.45); }
+.auth-submit {
+  padding: 0.9rem;
+  background: #fff;
+  color: #000;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.4rem;
+  transition: background 0.25s;
+}
+.auth-submit:hover { background: rgba(255,255,255,0.85); }
+.auth-error {
+  font-size: 0.78rem;
+  color: rgba(255,100,100,0.85);
+  font-family: 'Lato', sans-serif;
+  display: none;
+}
+
+/* ── TICKETS MODAL ── */
+.tickets-modal {
+  background: #0f0f0f;
+  border: 1px solid rgba(255,255,255,0.15);
+  width: 100%;
+  max-width: 520px;
+  padding: 2.5rem;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.tickets-heading {
+  font-family: 'Changa One', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+.tickets-sub {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+.tickets-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  border: 1px dashed rgba(255,255,255,0.1);
+}
+.tickets-empty-icon { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.2; }
+.tickets-empty p {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.3);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.tickets-empty a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.tickets-empty a:hover { color: #fff; }
+
 .nav-social {
   display: flex;
   align-items: center;
@@ -515,59 +738,89 @@ footer {
 .sms-section {
   border-top: 1px solid rgba(255,255,255,0.08);
   text-align: center;
+  padding: 3.5rem 3rem;
 }
 
 .sms-heading {
-  font-family: 'Changa One', sans-serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  letter-spacing: 0.05em;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: rgba(255,255,255,0.35);
   text-transform: uppercase;
-  color: #fff;
-  line-height: 1;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 }
 
 .sms-subtext {
   font-family: 'Lato', sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 300;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.7;
-  max-width: 420px;
-  margin: 0 auto 2.5rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  max-width: 360px;
+  margin: 0 auto 1.6rem;
 }
 
 .sms-form {
   display: flex;
   align-items: stretch;
-  max-width: 440px;
+  max-width: 400px;
   margin: 0 auto;
   gap: 0;
 }
 
-.sms-country {
-  padding: 0.95rem 1.8rem 0.95rem 1rem;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-right: none;
-  color: rgba(255,255,255,0.65);
-  font-family: 'Lato', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 700;
-  outline: none;
-  cursor: pointer;
-  -webkit-appearance: none;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.55rem center;
-  background-size: 10px;
-  transition: border-color 0.25s;
+/* ── CUSTOM COUNTRY PICKER ── */
+.country-picker {
+  position: relative;
   flex-shrink: 0;
 }
 
-.sms-country:focus { border-color: rgba(255,255,255,0.5); }
-.sms-country option { background: #111; color: #fff; }
+.country-btn {
+  height: 100%;
+  padding: 0 0.9rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-right: none;
+  color: rgba(255,255,255,0.75);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: border-color 0.25s;
+}
+.country-btn:hover { border-color: rgba(255,255,255,0.4); }
+.country-btn svg { width: 9px; height: 9px; fill: none; stroke: rgba(255,255,255,0.4); stroke-width: 1.5; stroke-linecap: round; }
+
+.country-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 230px;
+  max-height: 240px;
+  overflow-y: auto;
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.15);
+  z-index: 400;
+  display: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+}
+.country-list.open { display: block; }
+.country-list-item {
+  padding: 0.55rem 1rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.country-list-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
+.country-list-item.selected { color: #fff; }
 
 .sms-input {
   flex: 1;
@@ -664,6 +917,17 @@ footer {
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
+    <!-- Profile -->
+    <div style="position:relative">
+      <button class="nav-profile-btn" id="profileBtn" aria-label="Account">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+      </button>
+      <div class="profile-dropdown" id="profileDropdown">
+        <div class="profile-dropdown-name" id="profileName"></div>
+        <a href="#" id="ticketsBtn">My Tickets</a>
+        <button id="logoutBtn">Sign Out</button>
+      </div>
+    </div>
     <!-- Instagram -->
     <a href="https://www.instagram.com/circuit909presents" target="_blank" rel="noopener" class="nav-social" aria-label="Instagram">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -750,13 +1014,282 @@ footer {
   </div>
 </section>
 
+<!-- Contact -->
+<section id="contact" class="content">
+  <div class="section-inner" style="text-align:center">
+    <p class="section-label" style="text-align:center">Get in Touch</p>
+    <h2 class="section-heading" style="margin-bottom:1.5rem">Connect</h2>
+    <p class="contact-body">
+      Want to collaborate, book an event, or just talk music?<br>
+      Reach out to us at <a href="mailto:dance@circuit909.com" style="color:rgba(255,255,255,0.7);text-decoration:underline;text-underline-offset:3px;">dance@circuit909.com</a>
+    </p>
+    <a href="mailto:dance@circuit909.com" class="btn-primary">Send a Message</a>
+  </div>
+</section>
+
 <!-- SMS Signup -->
 <section class="content sms-section">
-  <div class="section-inner">
+  <div class="section-inner" style="max-width:600px;margin:0 auto">
     <h2 class="sms-heading">Stay in the Loop</h2>
     <p class="sms-subtext">Drop your number and we'll text you every time there's a new event. No spam — just the music.</p>
     <form class="sms-form" id="smsForm">
-      <select class="sms-country" id="countrySelect">
+      <div class="country-picker" id="countryPicker">
+        <button type="button" class="country-btn" id="countryBtn">
+          +1
+          <svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="country-list" id="countryList">
+          <div class="country-list-item selected" data-code="1">+1 — US / Canada</div>
+          <div class="country-list-item" data-code="1">+1 — American Samoa</div>
+          <div class="country-list-item" data-code="1">+1 — Anguilla</div>
+          <div class="country-list-item" data-code="1">+1 — Antigua &amp; Barbuda</div>
+          <div class="country-list-item" data-code="1">+1 — Bahamas</div>
+          <div class="country-list-item" data-code="1">+1 — Barbados</div>
+          <div class="country-list-item" data-code="1">+1 — Bermuda</div>
+          <div class="country-list-item" data-code="1">+1 — British Virgin Islands</div>
+          <div class="country-list-item" data-code="1">+1 — Cayman Islands</div>
+          <div class="country-list-item" data-code="1">+1 — Dominica</div>
+          <div class="country-list-item" data-code="1">+1 — Dominican Republic</div>
+          <div class="country-list-item" data-code="1">+1 — Grenada</div>
+          <div class="country-list-item" data-code="1">+1 — Guam</div>
+          <div class="country-list-item" data-code="1">+1 — Jamaica</div>
+          <div class="country-list-item" data-code="1">+1 — N. Mariana Islands</div>
+          <div class="country-list-item" data-code="1">+1 — Puerto Rico</div>
+          <div class="country-list-item" data-code="1">+1 — Trinidad &amp; Tobago</div>
+          <div class="country-list-item" data-code="1">+1 — U.S. Virgin Islands</div>
+          <div class="country-list-item" data-code="7">+7 — Russia</div>
+          <div class="country-list-item" data-code="7">+7 — Kazakhstan</div>
+          <div class="country-list-item" data-code="20">+20 — Egypt</div>
+          <div class="country-list-item" data-code="27">+27 — South Africa</div>
+          <div class="country-list-item" data-code="30">+30 — Greece</div>
+          <div class="country-list-item" data-code="31">+31 — Netherlands</div>
+          <div class="country-list-item" data-code="32">+32 — Belgium</div>
+          <div class="country-list-item" data-code="33">+33 — France</div>
+          <div class="country-list-item" data-code="34">+34 — Spain</div>
+          <div class="country-list-item" data-code="36">+36 — Hungary</div>
+          <div class="country-list-item" data-code="39">+39 — Italy</div>
+          <div class="country-list-item" data-code="40">+40 — Romania</div>
+          <div class="country-list-item" data-code="41">+41 — Switzerland</div>
+          <div class="country-list-item" data-code="43">+43 — Austria</div>
+          <div class="country-list-item" data-code="44">+44 — United Kingdom</div>
+          <div class="country-list-item" data-code="45">+45 — Denmark</div>
+          <div class="country-list-item" data-code="46">+46 — Sweden</div>
+          <div class="country-list-item" data-code="47">+47 — Norway</div>
+          <div class="country-list-item" data-code="47">+47 — Svalbard &amp; Jan Mayen</div>
+          <div class="country-list-item" data-code="48">+48 — Poland</div>
+          <div class="country-list-item" data-code="49">+49 — Germany</div>
+          <div class="country-list-item" data-code="51">+51 — Peru</div>
+          <div class="country-list-item" data-code="52">+52 — Mexico</div>
+          <div class="country-list-item" data-code="53">+53 — Cuba</div>
+          <div class="country-list-item" data-code="54">+54 — Argentina</div>
+          <div class="country-list-item" data-code="55">+55 — Brazil</div>
+          <div class="country-list-item" data-code="56">+56 — Chile</div>
+          <div class="country-list-item" data-code="57">+57 — Colombia</div>
+          <div class="country-list-item" data-code="58">+58 — Venezuela</div>
+          <div class="country-list-item" data-code="60">+60 — Malaysia</div>
+          <div class="country-list-item" data-code="61">+61 — Australia</div>
+          <div class="country-list-item" data-code="61">+61 — Christmas Island</div>
+          <div class="country-list-item" data-code="61">+61 — Cocos Islands</div>
+          <div class="country-list-item" data-code="62">+62 — Indonesia</div>
+          <div class="country-list-item" data-code="63">+63 — Philippines</div>
+          <div class="country-list-item" data-code="64">+64 — New Zealand</div>
+          <div class="country-list-item" data-code="64">+64 — Pitcairn</div>
+          <div class="country-list-item" data-code="65">+65 — Singapore</div>
+          <div class="country-list-item" data-code="66">+66 — Thailand</div>
+          <div class="country-list-item" data-code="81">+81 — Japan</div>
+          <div class="country-list-item" data-code="82">+82 — South Korea</div>
+          <div class="country-list-item" data-code="84">+84 — Vietnam</div>
+          <div class="country-list-item" data-code="86">+86 — China</div>
+          <div class="country-list-item" data-code="90">+90 — Turkey</div>
+          <div class="country-list-item" data-code="91">+91 — India</div>
+          <div class="country-list-item" data-code="92">+92 — Pakistan</div>
+          <div class="country-list-item" data-code="93">+93 — Afghanistan</div>
+          <div class="country-list-item" data-code="94">+94 — Sri Lanka</div>
+          <div class="country-list-item" data-code="95">+95 — Myanmar</div>
+          <div class="country-list-item" data-code="98">+98 — Iran</div>
+          <div class="country-list-item" data-code="212">+212 — Morocco</div>
+          <div class="country-list-item" data-code="212">+212 — Western Sahara</div>
+          <div class="country-list-item" data-code="213">+213 — Algeria</div>
+          <div class="country-list-item" data-code="216">+216 — Tunisia</div>
+          <div class="country-list-item" data-code="218">+218 — Libya</div>
+          <div class="country-list-item" data-code="220">+220 — Gambia</div>
+          <div class="country-list-item" data-code="221">+221 — Senegal</div>
+          <div class="country-list-item" data-code="222">+222 — Mauritania</div>
+          <div class="country-list-item" data-code="223">+223 — Mali</div>
+          <div class="country-list-item" data-code="224">+224 — Guinea</div>
+          <div class="country-list-item" data-code="225">+225 — Ivory Coast</div>
+          <div class="country-list-item" data-code="226">+226 — Burkina Faso</div>
+          <div class="country-list-item" data-code="227">+227 — Niger</div>
+          <div class="country-list-item" data-code="228">+228 — Togo</div>
+          <div class="country-list-item" data-code="229">+229 — Benin</div>
+          <div class="country-list-item" data-code="230">+230 — Mauritius</div>
+          <div class="country-list-item" data-code="231">+231 — Liberia</div>
+          <div class="country-list-item" data-code="232">+232 — Sierra Leone</div>
+          <div class="country-list-item" data-code="233">+233 — Ghana</div>
+          <div class="country-list-item" data-code="234">+234 — Nigeria</div>
+          <div class="country-list-item" data-code="235">+235 — Chad</div>
+          <div class="country-list-item" data-code="236">+236 — Central African Republic</div>
+          <div class="country-list-item" data-code="237">+237 — Cameroon</div>
+          <div class="country-list-item" data-code="238">+238 — Cape Verde</div>
+          <div class="country-list-item" data-code="239">+239 — Sao Tome &amp; Principe</div>
+          <div class="country-list-item" data-code="240">+240 — Equatorial Guinea</div>
+          <div class="country-list-item" data-code="241">+241 — Gabon</div>
+          <div class="country-list-item" data-code="242">+242 — Republic of the Congo</div>
+          <div class="country-list-item" data-code="243">+243 — DR Congo</div>
+          <div class="country-list-item" data-code="244">+244 — Angola</div>
+          <div class="country-list-item" data-code="245">+245 — Guinea-Bissau</div>
+          <div class="country-list-item" data-code="246">+246 — British Indian Ocean Territory</div>
+          <div class="country-list-item" data-code="248">+248 — Seychelles</div>
+          <div class="country-list-item" data-code="249">+249 — Sudan</div>
+          <div class="country-list-item" data-code="250">+250 — Rwanda</div>
+          <div class="country-list-item" data-code="251">+251 — Ethiopia</div>
+          <div class="country-list-item" data-code="252">+252 — Somalia</div>
+          <div class="country-list-item" data-code="253">+253 — Djibouti</div>
+          <div class="country-list-item" data-code="254">+254 — Kenya</div>
+          <div class="country-list-item" data-code="255">+255 — Tanzania</div>
+          <div class="country-list-item" data-code="256">+256 — Uganda</div>
+          <div class="country-list-item" data-code="257">+257 — Burundi</div>
+          <div class="country-list-item" data-code="258">+258 — Mozambique</div>
+          <div class="country-list-item" data-code="260">+260 — Zambia</div>
+          <div class="country-list-item" data-code="261">+261 — Madagascar</div>
+          <div class="country-list-item" data-code="262">+262 — Mayotte</div>
+          <div class="country-list-item" data-code="262">+262 — Reunion</div>
+          <div class="country-list-item" data-code="263">+263 — Zimbabwe</div>
+          <div class="country-list-item" data-code="264">+264 — Namibia</div>
+          <div class="country-list-item" data-code="265">+265 — Malawi</div>
+          <div class="country-list-item" data-code="266">+266 — Lesotho</div>
+          <div class="country-list-item" data-code="267">+267 — Botswana</div>
+          <div class="country-list-item" data-code="268">+268 — Swaziland</div>
+          <div class="country-list-item" data-code="269">+269 — Comoros</div>
+          <div class="country-list-item" data-code="290">+290 — Saint Helena</div>
+          <div class="country-list-item" data-code="291">+291 — Eritrea</div>
+          <div class="country-list-item" data-code="297">+297 — Aruba</div>
+          <div class="country-list-item" data-code="298">+298 — Faroe Islands</div>
+          <div class="country-list-item" data-code="299">+299 — Greenland</div>
+          <div class="country-list-item" data-code="350">+350 — Gibraltar</div>
+          <div class="country-list-item" data-code="351">+351 — Portugal</div>
+          <div class="country-list-item" data-code="352">+352 — Luxembourg</div>
+          <div class="country-list-item" data-code="353">+353 — Ireland</div>
+          <div class="country-list-item" data-code="354">+354 — Iceland</div>
+          <div class="country-list-item" data-code="355">+355 — Albania</div>
+          <div class="country-list-item" data-code="356">+356 — Malta</div>
+          <div class="country-list-item" data-code="357">+357 — Cyprus</div>
+          <div class="country-list-item" data-code="358">+358 — Finland</div>
+          <div class="country-list-item" data-code="359">+359 — Bulgaria</div>
+          <div class="country-list-item" data-code="370">+370 — Lithuania</div>
+          <div class="country-list-item" data-code="371">+371 — Latvia</div>
+          <div class="country-list-item" data-code="372">+372 — Estonia</div>
+          <div class="country-list-item" data-code="373">+373 — Moldova</div>
+          <div class="country-list-item" data-code="374">+374 — Armenia</div>
+          <div class="country-list-item" data-code="375">+375 — Belarus</div>
+          <div class="country-list-item" data-code="376">+376 — Andorra</div>
+          <div class="country-list-item" data-code="377">+377 — Monaco</div>
+          <div class="country-list-item" data-code="378">+378 — San Marino</div>
+          <div class="country-list-item" data-code="379">+379 — Vatican</div>
+          <div class="country-list-item" data-code="380">+380 — Ukraine</div>
+          <div class="country-list-item" data-code="381">+381 — Serbia</div>
+          <div class="country-list-item" data-code="382">+382 — Montenegro</div>
+          <div class="country-list-item" data-code="383">+383 — Kosovo</div>
+          <div class="country-list-item" data-code="385">+385 — Croatia</div>
+          <div class="country-list-item" data-code="386">+386 — Slovenia</div>
+          <div class="country-list-item" data-code="387">+387 — Bosnia &amp; Herzegovina</div>
+          <div class="country-list-item" data-code="389">+389 — Macedonia</div>
+          <div class="country-list-item" data-code="420">+420 — Czech Republic</div>
+          <div class="country-list-item" data-code="421">+421 — Slovakia</div>
+          <div class="country-list-item" data-code="423">+423 — Liechtenstein</div>
+          <div class="country-list-item" data-code="500">+500 — Falkland Islands</div>
+          <div class="country-list-item" data-code="501">+501 — Belize</div>
+          <div class="country-list-item" data-code="502">+502 — Guatemala</div>
+          <div class="country-list-item" data-code="503">+503 — El Salvador</div>
+          <div class="country-list-item" data-code="504">+504 — Honduras</div>
+          <div class="country-list-item" data-code="505">+505 — Nicaragua</div>
+          <div class="country-list-item" data-code="506">+506 — Costa Rica</div>
+          <div class="country-list-item" data-code="507">+507 — Panama</div>
+          <div class="country-list-item" data-code="508">+508 — Saint Pierre &amp; Miquelon</div>
+          <div class="country-list-item" data-code="509">+509 — Haiti</div>
+          <div class="country-list-item" data-code="590">+590 — Saint Barthelemy</div>
+          <div class="country-list-item" data-code="590">+590 — Saint Martin</div>
+          <div class="country-list-item" data-code="591">+591 — Bolivia</div>
+          <div class="country-list-item" data-code="592">+592 — Guyana</div>
+          <div class="country-list-item" data-code="593">+593 — Ecuador</div>
+          <div class="country-list-item" data-code="595">+595 — Paraguay</div>
+          <div class="country-list-item" data-code="597">+597 — Suriname</div>
+          <div class="country-list-item" data-code="598">+598 — Uruguay</div>
+          <div class="country-list-item" data-code="599">+599 — Curacao</div>
+          <div class="country-list-item" data-code="599">+599 — Netherlands Antilles</div>
+          <div class="country-list-item" data-code="670">+670 — East Timor</div>
+          <div class="country-list-item" data-code="672">+672 — Antarctica</div>
+          <div class="country-list-item" data-code="673">+673 — Brunei</div>
+          <div class="country-list-item" data-code="674">+674 — Nauru</div>
+          <div class="country-list-item" data-code="675">+675 — Papua New Guinea</div>
+          <div class="country-list-item" data-code="676">+676 — Tonga</div>
+          <div class="country-list-item" data-code="677">+677 — Solomon Islands</div>
+          <div class="country-list-item" data-code="678">+678 — Vanuatu</div>
+          <div class="country-list-item" data-code="679">+679 — Fiji</div>
+          <div class="country-list-item" data-code="680">+680 — Palau</div>
+          <div class="country-list-item" data-code="681">+681 — Wallis &amp; Futuna</div>
+          <div class="country-list-item" data-code="682">+682 — Cook Islands</div>
+          <div class="country-list-item" data-code="683">+683 — Niue</div>
+          <div class="country-list-item" data-code="685">+685 — Samoa</div>
+          <div class="country-list-item" data-code="686">+686 — Kiribati</div>
+          <div class="country-list-item" data-code="687">+687 — New Caledonia</div>
+          <div class="country-list-item" data-code="688">+688 — Tuvalu</div>
+          <div class="country-list-item" data-code="689">+689 — French Polynesia</div>
+          <div class="country-list-item" data-code="690">+690 — Tokelau</div>
+          <div class="country-list-item" data-code="691">+691 — Micronesia</div>
+          <div class="country-list-item" data-code="692">+692 — Marshall Islands</div>
+          <div class="country-list-item" data-code="850">+850 — North Korea</div>
+          <div class="country-list-item" data-code="852">+852 — Hong Kong</div>
+          <div class="country-list-item" data-code="853">+853 — Macau</div>
+          <div class="country-list-item" data-code="855">+855 — Cambodia</div>
+          <div class="country-list-item" data-code="856">+856 — Laos</div>
+          <div class="country-list-item" data-code="880">+880 — Bangladesh</div>
+          <div class="country-list-item" data-code="886">+886 — Taiwan</div>
+          <div class="country-list-item" data-code="960">+960 — Maldives</div>
+          <div class="country-list-item" data-code="962">+962 — Jordan</div>
+          <div class="country-list-item" data-code="963">+963 — Syria</div>
+          <div class="country-list-item" data-code="964">+964 — Iraq</div>
+          <div class="country-list-item" data-code="965">+965 — Kuwait</div>
+          <div class="country-list-item" data-code="966">+966 — Saudi Arabia</div>
+          <div class="country-list-item" data-code="967">+967 — Yemen</div>
+          <div class="country-list-item" data-code="968">+968 — Oman</div>
+          <div class="country-list-item" data-code="970">+970 — Palestine</div>
+          <div class="country-list-item" data-code="971">+971 — United Arab Emirates</div>
+          <div class="country-list-item" data-code="972">+972 — Israel</div>
+          <div class="country-list-item" data-code="973">+973 — Bahrain</div>
+          <div class="country-list-item" data-code="974">+974 — Qatar</div>
+          <div class="country-list-item" data-code="975">+975 — Bhutan</div>
+          <div class="country-list-item" data-code="976">+976 — Mongolia</div>
+          <div class="country-list-item" data-code="977">+977 — Nepal</div>
+          <div class="country-list-item" data-code="992">+992 — Tajikistan</div>
+          <div class="country-list-item" data-code="993">+993 — Turkmenistan</div>
+          <div class="country-list-item" data-code="994">+994 — Azerbaijan</div>
+          <div class="country-list-item" data-code="995">+995 — Georgia</div>
+          <div class="country-list-item" data-code="996">+996 — Kyrgyzstan</div>
+          <div class="country-list-item" data-code="998">+998 — Uzbekistan</div>
+        </div>
+      </div>
+      <input type="hidden" id="countryCode" value="1">
+      <input class="sms-input" type="tel" id="phoneInput" placeholder="(555) 000-0000" maxlength="15" autocomplete="tel-national">
+      <button class="sms-btn" type="submit">Notify Me</button>
+    </form>
+    <p class="sms-success" id="smsSuccess">You're in. We'll keep you posted.</p>
+    <p class="sms-disclaimer">By submitting you agree to receive text messages from Circuit 909. Reply STOP to opt out.</p>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="content">
+  <div class="section-inner" style="text-align:center">
+    <p class="section-label" style="text-align:center">Get in Touch</p>
+    <h2 class="section-heading" style="margin-bottom:1.5rem">Connect</h2>
+    <p class="contact-body">
+      Want to collaborate, book an event, or just talk music?<br>
+      Reach out to us at <a href="mailto:dance@circuit909.com" style="color:rgba(255,255,255,0.7);text-decoration:underline;text-underline-offset:3px;">dance@circuit909.com</a>
+    </p>
+    <a href="mailto:dance@circuit909.com" class="btn-primary">Send a Message</a>
+  </div>
+</section>
         <option value="1">+1 — US / Canada</option>
         <option value="1">+1 — American Samoa</option>
         <option value="1">+1 — Anguilla</option>
@@ -1020,6 +1553,45 @@ footer {
   </div>
 </footer>
 
+<!-- Auth Modal -->
+<div class="modal-overlay" id="authOverlay">
+  <div class="auth-modal">
+    <button class="modal-close" id="authClose">&times;</button>
+    <p class="auth-brand">Circuit 909</p>
+    <div class="auth-tabs">
+      <button class="auth-tab-btn active" data-tab="login">Log In</button>
+      <button class="auth-tab-btn" data-tab="signup">Sign Up</button>
+    </div>
+    <div class="auth-panel active" id="loginPanel">
+      <input class="auth-input" type="email" id="loginEmail" placeholder="Email" autocomplete="email">
+      <input class="auth-input" type="password" id="loginPassword" placeholder="Password" autocomplete="current-password">
+      <p class="auth-error" id="loginError">Incorrect email or password.</p>
+      <button class="auth-submit" id="loginSubmit">Log In</button>
+    </div>
+    <div class="auth-panel" id="signupPanel">
+      <input class="auth-input" type="text" id="signupName" placeholder="Full Name" autocomplete="name">
+      <input class="auth-input" type="email" id="signupEmail" placeholder="Email" autocomplete="email">
+      <input class="auth-input" type="password" id="signupPassword" placeholder="Password" autocomplete="new-password">
+      <p class="auth-error" id="signupError">An account with this email already exists.</p>
+      <button class="auth-submit" id="signupSubmit">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tickets Modal -->
+<div class="modal-overlay" id="ticketsOverlay">
+  <div class="tickets-modal">
+    <button class="modal-close" id="ticketsClose">&times;</button>
+    <h2 class="tickets-heading">My Tickets</h2>
+    <p class="tickets-sub" id="ticketsUserSub"></p>
+    <div class="tickets-empty">
+      <div class="tickets-empty-icon">🎫</div>
+      <p>You don't have any tickets yet.<br>Check out upcoming events and grab your spot.</p>
+      <a href="events.html">Browse Events</a>
+    </div>
+  </div>
+</div>
+
 <script>
 // ═══════════════════════════════════════════════
 //  CIRCUIT BOARD BACKGROUND
@@ -1160,76 +1732,187 @@ const revealObs = new IntersectionObserver((entries) => {
 document.querySelectorAll('[data-observe]').forEach(el => revealObs.observe(el));
 
 // ═══════════════════════════════════════════════
-//  SMS SIGNUP
+//  CUSTOM COUNTRY PICKER
 // ═══════════════════════════════════════════════
+const countryBtn = document.getElementById('countryBtn');
+const countryList = document.getElementById('countryList');
+const countryCodeInput = document.getElementById('countryCode');
 const phoneInput = document.getElementById('phoneInput');
-const countrySelect = document.getElementById('countrySelect');
 const smsForm = document.getElementById('smsForm');
 const smsSuccess = document.getElementById('smsSuccess');
 
+countryBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  countryList.classList.toggle('open');
+});
+
+document.querySelectorAll('.country-list-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.country-list-item').forEach(i => i.classList.remove('selected'));
+    item.classList.add('selected');
+    const code = item.dataset.code;
+    countryCodeInput.value = code;
+    countryBtn.innerHTML = `+${code} <svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg>`;
+    countryList.classList.remove('open');
+    phoneInput.placeholder = code === '1' ? '(555) 000-0000' : 'Phone number';
+    phoneInput.value = formatPhone(phoneInput.value.replace(/\D/g,''), code);
+  });
+});
+
+document.addEventListener('click', (e) => {
+  if (!document.getElementById('countryPicker').contains(e.target)) {
+    countryList.classList.remove('open');
+  }
+});
+
 function stripCountryCode(raw) {
-  const code = countrySelect.value; // e.g. "1", "44"
-  // Remove everything except digits and leading +
+  const code = countryCodeInput.value;
   let digits = raw.replace(/[^\d+]/g, '');
-  // If browser autofilled with +countrycode prefix, strip it
   if (digits.startsWith('+')) {
-    digits = digits.slice(1); // remove +
+    digits = digits.slice(1);
     if (digits.startsWith(code)) digits = digits.slice(code.length);
-  } else {
-    // Also catch bare country code prefix pasted without +
-    if (digits.length > 10 && digits.startsWith(code)) {
-      digits = digits.slice(code.length);
-    }
+  } else if (digits.length > 10 && digits.startsWith(code)) {
+    digits = digits.slice(code.length);
   }
   return digits.replace(/\D/g, '');
 }
 
-function formatPhone(digits) {
-  const code = countrySelect.value;
+function formatPhone(digits, code) {
+  code = code || countryCodeInput.value;
   if (code === '1') {
-    // North America: (XXX) XXX-XXXX
     digits = digits.slice(0, 10);
     if (digits.length >= 7) return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
     if (digits.length >= 4) return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
     if (digits.length >= 1) return `(${digits}`;
     return '';
   }
-  // Other countries: plain digits, max 15
   return digits.slice(0, 15);
 }
 
-function updatePlaceholder() {
-  phoneInput.placeholder = countrySelect.value === '1' ? '(555) 000-0000' : 'Phone number';
-}
-
-countrySelect.addEventListener('change', () => {
-  updatePlaceholder();
-  const digits = phoneInput.value.replace(/\D/g, '');
-  phoneInput.value = formatPhone(digits);
-});
-
 phoneInput.addEventListener('input', () => {
-  const cursor = phoneInput.selectionStart;
-  const raw = phoneInput.value;
-  const digits = stripCountryCode(raw);
-  const formatted = formatPhone(digits);
-  phoneInput.value = formatted;
+  phoneInput.value = formatPhone(stripCountryCode(phoneInput.value));
 });
-
-// Catch autocomplete (fires on change when user picks a suggestion)
 phoneInput.addEventListener('change', () => {
-  const digits = stripCountryCode(phoneInput.value);
-  phoneInput.value = formatPhone(digits);
+  phoneInput.value = formatPhone(stripCountryCode(phoneInput.value));
 });
 
 smsForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const digits = phoneInput.value.replace(/\D/g, '');
-  const min = countrySelect.value === '1' ? 10 : 5;
+  const min = countryCodeInput.value === '1' ? 10 : 5;
   if (digits.length < min) { phoneInput.style.borderColor = 'rgba(255,80,80,0.6)'; return; }
   phoneInput.style.borderColor = '';
   smsForm.style.display = 'none';
   smsSuccess.style.display = 'block';
+});
+
+// ═══════════════════════════════════════════════
+//  AUTH + PROFILE
+// ═══════════════════════════════════════════════
+const profileBtn = document.getElementById('profileBtn');
+const profileDropdown = document.getElementById('profileDropdown');
+const profileName = document.getElementById('profileName');
+const authOverlay = document.getElementById('authOverlay');
+const ticketsOverlay = document.getElementById('ticketsOverlay');
+
+let currentUser = JSON.parse(localStorage.getItem('c909_user') || 'null');
+
+function getUsers() { return JSON.parse(localStorage.getItem('c909_users') || '{}'); }
+function saveUsers(u) { localStorage.setItem('c909_users', JSON.stringify(u)); }
+
+function updateNavProfile() {
+  if (currentUser) {
+    const initials = currentUser.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+    profileBtn.innerHTML = `<span class="initials">${initials}</span>`;
+    profileBtn.style.background = 'rgba(255,255,255,0.12)';
+    profileName.textContent = currentUser.name;
+    profileDropdown.style.display = '';
+  } else {
+    profileBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>`;
+    profileBtn.style.background = '';
+    profileDropdown.style.display = 'none';
+  }
+}
+updateNavProfile();
+
+// Toggle dropdown / open auth modal
+profileBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (currentUser) {
+    profileDropdown.classList.toggle('open');
+  } else {
+    authOverlay.classList.add('open');
+  }
+});
+
+document.addEventListener('click', () => profileDropdown.classList.remove('open'));
+
+// Auth modal tabs
+document.querySelectorAll('.auth-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.auth-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab + 'Panel').classList.add('active');
+  });
+});
+
+// Close modals
+document.getElementById('authClose').addEventListener('click', () => authOverlay.classList.remove('open'));
+document.getElementById('ticketsClose').addEventListener('click', () => ticketsOverlay.classList.remove('open'));
+[authOverlay, ticketsOverlay].forEach(overlay => {
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('open'); });
+});
+
+// Login
+document.getElementById('loginSubmit').addEventListener('click', () => {
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('loginPassword').value;
+  const users = getUsers();
+  const err = document.getElementById('loginError');
+  if (users[email] && users[email].password === btoa(pass)) {
+    currentUser = { name: users[email].name, email };
+    localStorage.setItem('c909_user', JSON.stringify(currentUser));
+    authOverlay.classList.remove('open');
+    updateNavProfile();
+    err.style.display = 'none';
+  } else {
+    err.style.display = 'block';
+  }
+});
+
+// Sign up
+document.getElementById('signupSubmit').addEventListener('click', () => {
+  const name = document.getElementById('signupName').value.trim();
+  const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('signupPassword').value;
+  const err = document.getElementById('signupError');
+  if (!name || !email || !pass) { err.textContent = 'Please fill in all fields.'; err.style.display = 'block'; return; }
+  const users = getUsers();
+  if (users[email]) { err.textContent = 'An account with this email already exists.'; err.style.display = 'block'; return; }
+  users[email] = { name, password: btoa(pass), tickets: [] };
+  saveUsers(users);
+  currentUser = { name, email };
+  localStorage.setItem('c909_user', JSON.stringify(currentUser));
+  authOverlay.classList.remove('open');
+  updateNavProfile();
+  err.style.display = 'none';
+});
+
+// Sign out
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  currentUser = null;
+  localStorage.removeItem('c909_user');
+  updateNavProfile();
+  profileDropdown.classList.remove('open');
+});
+
+// My Tickets
+document.getElementById('ticketsBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+  profileDropdown.classList.remove('open');
+  document.getElementById('ticketsUserSub').textContent = currentUser.email;
+  ticketsOverlay.classList.add('open');
 });
 </script>
 </body>
