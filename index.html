@@ -545,19 +545,29 @@ footer {
   gap: 0;
 }
 
-.sms-prefix {
-  display: flex;
-  align-items: center;
-  padding: 0 1rem;
+.sms-country {
+  padding: 0.95rem 1.8rem 0.95rem 1rem;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.2);
   border-right: none;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.65);
   font-family: 'Lato', sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 700;
-  white-space: nowrap;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.55rem center;
+  background-size: 10px;
+  transition: border-color 0.25s;
+  flex-shrink: 0;
 }
+
+.sms-country:focus { border-color: rgba(255,255,255,0.5); }
+.sms-country option { background: #111; color: #fff; }
 
 .sms-input {
   flex: 1;
@@ -759,8 +769,46 @@ footer {
     <h2 class="sms-heading">Stay in the Loop</h2>
     <p class="sms-subtext">Drop your number and we'll text you every time there's a new event. No spam — just the music.</p>
     <form class="sms-form" id="smsForm">
-      <span class="sms-prefix">+1</span>
-      <input class="sms-input" type="tel" id="phoneInput" placeholder="(555) 000-0000" maxlength="14" autocomplete="tel">
+      <select class="sms-country" id="countrySelect">
+        <option value="1">+1 US/CA</option>
+        <option value="44">+44 UK</option>
+        <option value="61">+61 AU</option>
+        <option value="64">+64 NZ</option>
+        <option value="33">+33 FR</option>
+        <option value="49">+49 DE</option>
+        <option value="34">+34 ES</option>
+        <option value="39">+39 IT</option>
+        <option value="31">+31 NL</option>
+        <option value="32">+32 BE</option>
+        <option value="46">+46 SE</option>
+        <option value="47">+47 NO</option>
+        <option value="45">+45 DK</option>
+        <option value="358">+358 FI</option>
+        <option value="353">+353 IE</option>
+        <option value="41">+41 CH</option>
+        <option value="43">+43 AT</option>
+        <option value="351">+351 PT</option>
+        <option value="48">+48 PL</option>
+        <option value="7">+7 RU</option>
+        <option value="55">+55 BR</option>
+        <option value="52">+52 MX</option>
+        <option value="54">+54 AR</option>
+        <option value="57">+57 CO</option>
+        <option value="81">+81 JP</option>
+        <option value="82">+82 KR</option>
+        <option value="86">+86 CN</option>
+        <option value="91">+91 IN</option>
+        <option value="65">+65 SG</option>
+        <option value="63">+63 PH</option>
+        <option value="66">+66 TH</option>
+        <option value="971">+971 AE</option>
+        <option value="972">+972 IL</option>
+        <option value="27">+27 ZA</option>
+        <option value="234">+234 NG</option>
+        <option value="254">+254 KE</option>
+        <option value="20">+20 EG</option>
+      </select>
+      <input class="sms-input" type="tel" id="phoneInput" placeholder="(555) 000-0000" maxlength="15" autocomplete="tel-national">
       <button class="sms-btn" type="submit">Notify Me</button>
     </form>
     <p class="sms-success" id="smsSuccess">You're in. We'll keep you posted.</p>
@@ -924,21 +972,70 @@ document.querySelectorAll('[data-observe]').forEach(el => revealObs.observe(el))
 //  SMS SIGNUP
 // ═══════════════════════════════════════════════
 const phoneInput = document.getElementById('phoneInput');
+const countrySelect = document.getElementById('countrySelect');
 const smsForm = document.getElementById('smsForm');
 const smsSuccess = document.getElementById('smsSuccess');
 
+function stripCountryCode(raw) {
+  const code = countrySelect.value; // e.g. "1", "44"
+  // Remove everything except digits and leading +
+  let digits = raw.replace(/[^\d+]/g, '');
+  // If browser autofilled with +countrycode prefix, strip it
+  if (digits.startsWith('+')) {
+    digits = digits.slice(1); // remove +
+    if (digits.startsWith(code)) digits = digits.slice(code.length);
+  } else {
+    // Also catch bare country code prefix pasted without +
+    if (digits.length > 10 && digits.startsWith(code)) {
+      digits = digits.slice(code.length);
+    }
+  }
+  return digits.replace(/\D/g, '');
+}
+
+function formatPhone(digits) {
+  const code = countrySelect.value;
+  if (code === '1') {
+    // North America: (XXX) XXX-XXXX
+    digits = digits.slice(0, 10);
+    if (digits.length >= 7) return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+    if (digits.length >= 4) return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+    if (digits.length >= 1) return `(${digits}`;
+    return '';
+  }
+  // Other countries: plain digits, max 15
+  return digits.slice(0, 15);
+}
+
+function updatePlaceholder() {
+  phoneInput.placeholder = countrySelect.value === '1' ? '(555) 000-0000' : 'Phone number';
+}
+
+countrySelect.addEventListener('change', () => {
+  updatePlaceholder();
+  const digits = phoneInput.value.replace(/\D/g, '');
+  phoneInput.value = formatPhone(digits);
+});
+
 phoneInput.addEventListener('input', () => {
-  let val = phoneInput.value.replace(/\D/g, '').slice(0, 10);
-  if (val.length >= 7) val = `(${val.slice(0,3)}) ${val.slice(3,6)}-${val.slice(6)}`;
-  else if (val.length >= 4) val = `(${val.slice(0,3)}) ${val.slice(3)}`;
-  else if (val.length >= 1) val = `(${val}`;
-  phoneInput.value = val;
+  const cursor = phoneInput.selectionStart;
+  const raw = phoneInput.value;
+  const digits = stripCountryCode(raw);
+  const formatted = formatPhone(digits);
+  phoneInput.value = formatted;
+});
+
+// Catch autocomplete (fires on change when user picks a suggestion)
+phoneInput.addEventListener('change', () => {
+  const digits = stripCountryCode(phoneInput.value);
+  phoneInput.value = formatPhone(digits);
 });
 
 smsForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const digits = phoneInput.value.replace(/\D/g, '');
-  if (digits.length < 10) { phoneInput.style.borderColor = 'rgba(255,80,80,0.6)'; return; }
+  const min = countrySelect.value === '1' ? 10 : 5;
+  if (digits.length < min) { phoneInput.style.borderColor = 'rgba(255,80,80,0.6)'; return; }
   phoneInput.style.borderColor = '';
   smsForm.style.display = 'none';
   smsSuccess.style.display = 'block';
