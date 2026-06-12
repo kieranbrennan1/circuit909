@@ -5,23 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Circuit 909</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Exo+2:ital,wght@1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Changa+One:ital@0;1&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --black: #000;
-  --white: #fff;
-  --dim: rgba(255,255,255,0.06);
-  --border: rgba(255,255,255,0.1);
-}
 
 html { scroll-behavior: smooth; }
 
 body {
-  background: #000;
+  background: #0a0a0a;
   color: #fff;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Lato', sans-serif;
   overflow-x: hidden;
 }
 
@@ -33,22 +26,7 @@ body {
   height: 100%;
   z-index: 0;
   pointer-events: none;
-}
-
-/* ── Scanlines ── */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(0,0,0,0.08) 3px,
-    rgba(0,0,0,0.08) 4px
-  );
-  pointer-events: none;
-  z-index: 999;
+  opacity: 0.35;
 }
 
 /* ── NAV ── */
@@ -57,61 +35,71 @@ nav {
   top: 0;
   width: 100%;
   z-index: 100;
-  padding: 1.8rem 4rem;
+  padding: 1.4rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
 }
 
 .nav-brand {
-  font-family: 'Orbitron', monospace;
-  font-size: 0.95rem;
-  letter-spacing: 0.35em;
+  font-family: 'Changa One', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #fff;
+  text-decoration: none;
 }
 
-.nav-links {
+.nav-center {
   display: flex;
-  gap: 3rem;
+  gap: 2.5rem;
   list-style: none;
 }
 
-.nav-links a {
-  color: rgba(255,255,255,0.45);
+.nav-center a {
+  color: rgba(255,255,255,0.7);
   text-decoration: none;
-  font-size: 0.75rem;
-  letter-spacing: 0.25em;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: color 0.3s;
-  position: relative;
+  transition: color 0.25s;
 }
 
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: #fff;
-  transition: width 0.35s ease;
+.nav-center a:hover { color: #fff; }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
 }
 
-.nav-links a:hover { color: #fff; }
-.nav-links a:hover::after { width: 100%; }
+.nav-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.7);
+  transition: color 0.25s;
+  text-decoration: none;
+}
+
+.nav-social:hover { color: #fff; }
+
+.nav-social svg { width: 20px; height: 20px; fill: currentColor; }
 
 /* ── HERO ── */
 .hero {
   position: relative;
   height: 100vh;
+  min-height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 1;
-  gap: 2.5rem;
+  gap: 0;
 }
 
 /* ── LOGO COIN ── */
@@ -121,8 +109,8 @@ nav {
 }
 
 .logo-coin {
-  width: 720px;
-  height: 370px;
+  width: 680px;
+  height: 350px;
   transform-style: preserve-3d;
   will-change: transform;
   transition: transform 0.05s linear;
@@ -138,7 +126,7 @@ nav {
 
 .logo-img-back {
   transform: scaleX(-1);
-  opacity: 0.6;
+  opacity: 0.55;
 }
 
 .coin-face {
@@ -149,81 +137,21 @@ nav {
   justify-content: center;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-}
-
-.coin-face.back {
-  transform: rotateY(180deg);
   background: transparent;
 }
 
-.coin-face.front {
-  background: transparent;
-}
+.coin-face.back { transform: rotateY(180deg); }
 
-/* No coin rim — logo floats clean */
-
-@keyframes rim-rotate {
-  to { transform: rotate(360deg); }
-}
-
-/* ── HERO TEXT ── */
-.hero-title {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(2.8rem, 7vw, 6.5rem);
-  font-weight: 900;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #fff;
-  position: relative;
-  text-align: center;
-  line-height: 1;
-}
-
-.hero-title::before,
-.hero-title::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-title::before {
-  color: rgba(0, 220, 255, 0.7);
-  animation: glitch-a 4s infinite;
-  clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
-}
-
-.hero-title::after {
-  color: rgba(255, 0, 120, 0.7);
-  animation: glitch-b 4s infinite;
-  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
-}
-
-@keyframes glitch-a {
-  0%, 88%, 100% { transform: translate(0); opacity: 0; }
-  89% { transform: translate(-4px, 1px); opacity: 0.8; }
-  91% { transform: translate(4px, -1px); opacity: 0.8; }
-  93% { transform: translate(-2px, 0); opacity: 0.5; }
-  95% { transform: translate(0); opacity: 0; }
-}
-
-@keyframes glitch-b {
-  0%, 88%, 100% { transform: translate(0); opacity: 0; }
-  90% { transform: translate(4px, 2px); opacity: 0.8; }
-  92% { transform: translate(-4px, -2px); opacity: 0.8; }
-  94% { transform: translate(2px, 0); opacity: 0.5; }
-  96% { transform: translate(0); opacity: 0; }
-}
-
+/* ── HERO TAGLINE ── */
 .hero-tagline {
-  font-family: 'Orbitron', monospace;
-  font-size: 1.2rem;
-  letter-spacing: 0.5em;
-  color: rgba(255,255,255,0.9);
-  text-transform: lowercase;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.6em;
+  color: rgba(255,255,255,0.65);
+  text-transform: uppercase;
   text-align: center;
+  margin-top: 1.8rem;
 }
 
 /* ── SCROLL HINT ── */
@@ -235,21 +163,21 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
-  cursor: default;
+  gap: 0.5rem;
 }
 
 .scroll-hint-text {
   font-size: 0.65rem;
   letter-spacing: 0.4em;
-  color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.2);
   text-transform: uppercase;
+  font-weight: 700;
 }
 
 .scroll-arrow {
   width: 1px;
-  height: 48px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0));
+  height: 44px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
   position: relative;
   overflow: hidden;
 }
@@ -261,7 +189,7 @@ nav {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.8), rgba(255,255,255,0));
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.7), transparent);
   animation: drip 2s ease-in-out infinite;
 }
 
@@ -270,12 +198,11 @@ nav {
   100% { top: 200%; }
 }
 
-/* ── SECTIONS ── */
+/* ── SECTION BASE ── */
 section.content {
   position: relative;
   z-index: 1;
-  padding: 7rem 5rem;
-  border-top: 1px solid var(--border);
+  padding: 6rem 3rem;
 }
 
 .section-inner {
@@ -283,285 +210,308 @@ section.content {
   margin: 0 auto;
 }
 
-.section-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.eyebrow-line {
-  width: 40px;
-  height: 1px;
-  background: rgba(255,255,255,0.4);
-}
-
-.eyebrow-text {
-  font-size: 0.7rem;
-  letter-spacing: 0.5em;
-  color: rgba(255,255,255,0.4);
-  text-transform: uppercase;
-}
-
-.section-title {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(1.8rem, 4vw, 3.2rem);
+.section-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: #fff;
-  line-height: 1.1;
-  margin-bottom: 3rem;
+  letter-spacing: 0.35em;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
 }
+
+.section-heading {
+  font-family: 'Changa One', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 3.5rem;
+}
+
+/* ── EVENTS ── */
+#events {
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.events-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.events-header-left .section-heading {
+  margin-bottom: 0;
+}
+
+.btn-outline {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border: 1px solid rgba(255,255,255,0.55);
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s;
+  white-space: nowrap;
+}
+
+.btn-outline:hover {
+  background: #fff;
+  color: #000;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.event-card {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #111;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.event-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.event-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+}
+
+.event-card:hover .event-card-bg {
+  transform: scale(1.05);
+}
+
+.event-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
+}
+
+.event-card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.8rem;
+}
+
+.event-date {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.event-name {
+  font-family: 'Changa One', sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 0.4rem;
+}
+
+.event-venue {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.05em;
+}
+
+/* event card color variants */
+.ec-1 .event-card-bg { background: linear-gradient(135deg, #1a0a2e 0%, #0d0d1a 60%, #000 100%); }
+.ec-2 .event-card-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
+.ec-3 .event-card-bg { background: linear-gradient(135deg, #0a1a0a 0%, #050505 100%); }
+.ec-4 .event-card-bg { background: linear-gradient(135deg, #1a0a0a 0%, #0d0000 100%); }
+.ec-5 .event-card-bg { background: linear-gradient(135deg, #0a0a1a 0%, #000 100%); }
+.ec-6 .event-card-bg { background: linear-gradient(135deg, #0d0d0d 0%, #1a0d00 100%); }
+
+/* circuit pattern overlay on event cards */
+.event-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.event-card-overlay { z-index: 2; }
+.event-card-info { z-index: 3; }
 
 /* ── ABOUT ── */
+#about {
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
 .about-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 5rem;
-  align-items: start;
+  align-items: center;
 }
 
 .about-text {
   color: rgba(255,255,255,0.5);
-  font-size: 1.15rem;
-  line-height: 1.9;
+  font-size: 1.05rem;
+  line-height: 1.95;
+  font-weight: 300;
 }
 
 .about-text strong {
   color: rgba(255,255,255,0.85);
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.stats-grid {
+.about-stat-block {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
+  gap: 2px;
+  background: rgba(255,255,255,0.06);
 }
 
-.stat {
-  background: #000;
-  padding: 2rem 1.5rem;
-  position: relative;
+.about-stat {
+  background: #0a0a0a;
+  padding: 2.5rem 2rem;
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(14px);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.stat.visible { opacity: 1; transform: translateY(0); }
-
-.stat::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 0;
-  background: #fff;
-  transition: height 0.6s ease 0.2s;
+.about-stat.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.stat.visible::before { height: 100%; }
-
-.stat-number {
-  font-family: 'Orbitron', monospace;
+.stat-num {
+  font-family: 'Changa One', sans-serif;
   font-size: 2.8rem;
-  font-weight: 900;
   color: #fff;
   line-height: 1;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
-.stat-label {
-  font-size: 0.72rem;
-  letter-spacing: 0.25em;
-  color: rgba(255,255,255,0.35);
-  text-transform: uppercase;
-}
-
-/* ── SERVICES ── */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
-}
-
-.service-card {
-  background: #000;
-  padding: 3rem 2.5rem;
-  position: relative;
-  overflow: hidden;
-  cursor: default;
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s;
-}
-
-.service-card.visible { opacity: 1; transform: translateY(0); }
-
-.service-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 1px;
-  background: #fff;
-  transition: width 0.5s ease, left 0.5s ease;
-}
-
-.service-card:hover { background: rgba(255,255,255,0.03); }
-.service-card:hover::after { width: 100%; left: 0; }
-
-.card-number {
-  font-family: 'Orbitron', monospace;
-  font-size: 0.65rem;
-  color: rgba(255,255,255,0.2);
-  letter-spacing: 0.4em;
-  margin-bottom: 2rem;
-}
-
-.card-icon {
-  width: 36px;
-  height: 36px;
-  margin-bottom: 1.5rem;
-  opacity: 0.6;
-}
-
-.card-title {
-  font-family: 'Orbitron', monospace;
-  font-size: 0.9rem;
-  color: #fff;
-  letter-spacing: 0.12em;
-  margin-bottom: 1rem;
-}
-
-.card-desc {
-  color: rgba(255,255,255,0.4);
-  font-size: 0.95rem;
-  line-height: 1.75;
-}
-
-/* ── MARQUEE ── */
-.marquee-wrap {
-  position: relative;
-  z-index: 1;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 1.2rem 0;
-  overflow: hidden;
-  background: rgba(255,255,255,0.015);
-}
-
-.marquee-track {
-  display: flex;
-  gap: 3rem;
-  animation: marquee 20s linear infinite;
-  width: max-content;
-}
-
-.marquee-item {
-  font-family: 'Orbitron', monospace;
+.stat-lbl {
   font-size: 0.7rem;
-  letter-spacing: 0.4em;
-  color: rgba(255,255,255,0.25);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.3);
   text-transform: uppercase;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 3rem;
 }
 
-.marquee-item::after {
-  content: '//';
-  color: rgba(255,255,255,0.12);
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-/* ── CTA ── */
-.cta-section {
+/* ── CONTACT ── */
+#contact {
+  border-top: 1px solid rgba(255,255,255,0.08);
   text-align: center;
 }
 
-.cta-body {
-  color: rgba(255,255,255,0.4);
-  font-size: 1.1rem;
+.contact-body {
+  color: rgba(255,255,255,0.45);
+  font-size: 1rem;
   line-height: 1.9;
-  max-width: 540px;
-  margin: 0 auto 3rem;
+  font-weight: 300;
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
 }
 
-.cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.1rem 3rem;
-  border: 1px solid rgba(255,255,255,0.6);
-  color: #fff;
-  font-family: 'Orbitron', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.35em;
+.btn-primary {
+  display: inline-block;
+  padding: 1rem 3rem;
+  background: #fff;
+  color: #000;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  transition: color 0.4s, border-color 0.4s;
+  transition: background 0.25s, color 0.25s;
 }
 
-.cta-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: #fff;
-  transform: translateX(-101%);
-  transition: transform 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+.btn-primary:hover {
+  background: rgba(255,255,255,0.85);
 }
-
-.cta-btn:hover { color: #000; border-color: #fff; }
-.cta-btn:hover::before { transform: translateX(0); }
-
-.cta-btn span { position: relative; z-index: 1; }
 
 /* ── FOOTER ── */
 footer {
   position: relative;
   z-index: 1;
-  padding: 2rem 5rem;
-  border-top: 1px solid var(--border);
+  padding: 2rem 3rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .footer-copy {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   color: rgba(255,255,255,0.2);
-  letter-spacing: 0.15em;
+  font-weight: 300;
+  letter-spacing: 0.05em;
 }
 
-.footer-mark {
-  font-family: 'Orbitron', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.4em;
-  color: rgba(255,255,255,0.15);
+.footer-social {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
 }
 
-/* ── CORNER BRACKETS ── */
-.corner {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  opacity: 0.35;
+.footer-social a {
+  color: rgba(255,255,255,0.25);
+  transition: color 0.25s;
+  text-decoration: none;
+  display: flex;
 }
 
-.corner-tl { top: 0; left: 0; border-top: 1px solid #fff; border-left: 1px solid #fff; }
-.corner-tr { top: 0; right: 0; border-top: 1px solid #fff; border-right: 1px solid #fff; }
-.corner-bl { bottom: 0; left: 0; border-bottom: 1px solid #fff; border-left: 1px solid #fff; }
-.corner-br { bottom: 0; right: 0; border-bottom: 1px solid #fff; border-right: 1px solid #fff; }
+.footer-social a:hover { color: rgba(255,255,255,0.7); }
+.footer-social svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-center { gap: 1.5rem; }
+  .logo-coin { width: 90vw; max-width: 540px; height: auto; aspect-ratio: 720/370; }
+  .events-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  section.content { padding: 4rem 1.5rem; }
+}
+
+@media (max-width: 600px) {
+  .nav-center { display: none; }
+  .logo-coin { width: 88vw; }
+  .events-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; text-align: center; }
+}
 </style>
 </head>
 <body>
@@ -570,24 +520,35 @@ footer {
 
 <!-- Navigation -->
 <nav>
-  <div class="nav-brand">Circuit<span style="opacity:0.4;margin:0 0.4em;">/</span>909</div>
-  <ul class="nav-links">
+  <a class="nav-brand" href="#">Circuit 909</a>
+  <ul class="nav-center">
+    <li><a href="#events">Events</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <div class="nav-right">
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/circuit909presents" target="_blank" rel="noopener" class="nav-social" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+    </a>
+    <!-- TikTok -->
+    <a href="https://www.tiktok.com/@circuit909" target="_blank" rel="noopener" class="nav-social" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/>
+      </svg>
+    </a>
+  </div>
 </nav>
 
 <!-- Hero -->
 <section class="hero">
   <div class="logo-stage">
     <div class="logo-coin" id="logoCoin">
-      <!-- Front face — your actual Circuit 909 logo -->
       <div class="coin-face front">
         <img src="logo.png" alt="Circuit 909" class="logo-img">
       </div>
-
-      <!-- Back face — mirrored logo -->
       <div class="coin-face back">
         <img src="logo.png" alt="Circuit 909" class="logo-img logo-img-back">
       </div>
@@ -602,143 +563,113 @@ footer {
   </div>
 </section>
 
-<!-- Marquee -->
-<div class="marquee-wrap">
-  <div class="marquee-track" id="marquee">
-    <span class="marquee-item">Sound Design</span>
-    <span class="marquee-item">Circuit 909</span>
-    <span class="marquee-item">Frequency</span>
-    <span class="marquee-item">Production</span>
-    <span class="marquee-item">909 BPM</span>
-    <span class="marquee-item">Futurism</span>
-    <span class="marquee-item">Engineering</span>
-    <span class="marquee-item">Signal Chain</span>
-    <span class="marquee-item">Sound Design</span>
-    <span class="marquee-item">Circuit 909</span>
-    <span class="marquee-item">Frequency</span>
-    <span class="marquee-item">Production</span>
-    <span class="marquee-item">909 BPM</span>
-    <span class="marquee-item">Futurism</span>
-    <span class="marquee-item">Engineering</span>
-    <span class="marquee-item">Signal Chain</span>
+<!-- Events -->
+<section id="events" class="content">
+  <div class="section-inner">
+    <div class="events-header">
+      <div class="events-header-left">
+        <p class="section-label">Circuit 909 Presents</p>
+        <h2 class="section-heading">Past Events</h2>
+      </div>
+      <a href="https://posh.vip/g/circuit909presents" target="_blank" rel="noopener" class="btn-outline">See All Events</a>
+    </div>
+
+    <div class="events-grid">
+
+      <div class="event-card ec-1" data-observe>
+        <div class="event-card-bg"></div>
+        <div class="event-card-overlay"></div>
+        <div class="event-card-info">
+          <p class="event-date">Coming Soon</p>
+          <h3 class="event-name">Circuit 909<br>Presents</h3>
+          <p class="event-venue">Follow for updates</p>
+        </div>
+      </div>
+
+      <div class="event-card ec-2" data-observe style="transition-delay:0.1s">
+        <div class="event-card-bg"></div>
+        <div class="event-card-overlay"></div>
+        <div class="event-card-info">
+          <p class="event-date">Coming Soon</p>
+          <h3 class="event-name">Circuit 909<br>Presents</h3>
+          <p class="event-venue">Follow for updates</p>
+        </div>
+      </div>
+
+      <div class="event-card ec-3" data-observe style="transition-delay:0.2s">
+        <div class="event-card-bg"></div>
+        <div class="event-card-overlay"></div>
+        <div class="event-card-info">
+          <p class="event-date">Coming Soon</p>
+          <h3 class="event-name">Circuit 909<br>Presents</h3>
+          <p class="event-venue">Follow for updates</p>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
+</section>
 
 <!-- About -->
 <section id="about" class="content">
   <div class="section-inner">
-    <div class="section-eyebrow">
-      <div class="eyebrow-line"></div>
-      <span class="eyebrow-text">About</span>
-    </div>
+    <p class="section-label">About</p>
     <div class="about-grid">
       <div>
-        <h2 class="section-title">Engineered<br>for the Edge</h2>
+        <h2 class="section-heading">Built for<br>the Sound</h2>
         <p class="about-text">
-          Circuit 909 is a <strong>forward-thinking creative force</strong> operating at
-          the intersection of sound design, technology, and culture. Born from the machines
-          — refined in the underground.<br><br>
-          We exist where <strong>frequency meets future</strong>. Every beat is a
-          signal. Every signal is a statement. Precision-engineered for those who
-          live beyond the grid.
+          Circuit 909 is a <strong>forward-thinking event brand</strong> operating at the intersection
+          of music, culture, and community. Born from the underground — driven by frequency.<br><br>
+          Every event is a signal. Every signal is a statement. We curate experiences for those
+          who live and breathe the music.
         </p>
       </div>
-      <div class="stats-grid">
-        <div class="stat" data-observe>
-          <div class="stat-number">909</div>
-          <div class="stat-label">Max BPM</div>
+      <div class="about-stat-block">
+        <div class="about-stat" data-observe>
+          <div class="stat-num">909</div>
+          <div class="stat-lbl">The Number</div>
         </div>
-        <div class="stat" data-observe>
-          <div class="stat-number">0.1<span style="font-size:1.4rem">ms</span></div>
-          <div class="stat-label">Latency</div>
+        <div class="about-stat" data-observe style="transition-delay:0.1s">
+          <div class="stat-num">100%</div>
+          <div class="stat-lbl">For the Music</div>
         </div>
-        <div class="stat" data-observe>
-          <div class="stat-number">∞</div>
-          <div class="stat-label">Possibilities</div>
+        <div class="about-stat" data-observe style="transition-delay:0.2s">
+          <div class="stat-num">∞</div>
+          <div class="stat-lbl">Possibilities</div>
         </div>
-        <div class="stat" data-observe>
-          <div class="stat-number">24<span style="font-size:1.4rem">/7</span></div>
-          <div class="stat-label">Always On</div>
+        <div class="about-stat" data-observe style="transition-delay:0.3s">
+          <div class="stat-num">24/7</div>
+          <div class="stat-lbl">Always On</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Services -->
-<section id="services" class="content">
-  <div class="section-inner">
-    <div class="section-eyebrow">
-      <div class="eyebrow-line"></div>
-      <span class="eyebrow-text">Services</span>
-    </div>
-    <h2 class="section-title">What We<br>Transmit</h2>
-    <div class="services-grid">
-      <div class="service-card" data-observe>
-        <div class="corner corner-tl"></div>
-        <p class="card-number">— 01</p>
-        <svg class="card-icon" viewBox="0 0 36 36" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 18 Q9 8 14 18 Q19 28 24 18 Q29 8 32 18"/>
-          <circle cx="4" cy="18" r="1.5" fill="white" stroke="none"/>
-          <circle cx="32" cy="18" r="1.5" fill="white" stroke="none"/>
-        </svg>
-        <h3 class="card-title">Sound Design</h3>
-        <p class="card-desc">Sonic landscapes engineered from the ground up. Texture, depth, and dimension that cuts through noise.</p>
-      </div>
-      <div class="service-card" data-observe style="transition-delay:0.1s">
-        <p class="card-number">— 02</p>
-        <svg class="card-icon" viewBox="0 0 36 36" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
-          <rect x="4" y="10" width="28" height="16" rx="2"/>
-          <line x1="8" y1="14" x2="8" y2="22"/>
-          <line x1="12" y1="12" x2="12" y2="24"/>
-          <line x1="16" y1="15" x2="16" y2="21"/>
-          <line x1="20" y1="11" x2="20" y2="25"/>
-          <line x1="24" y1="14" x2="24" y2="22"/>
-          <line x1="28" y1="16" x2="28" y2="20"/>
-        </svg>
-        <h3 class="card-title">Production</h3>
-        <p class="card-desc">Full-spectrum music production — from concept to master. Zero compromise on dynamics or detail.</p>
-      </div>
-      <div class="service-card" data-observe style="transition-delay:0.2s">
-        <div class="corner corner-br"></div>
-        <p class="card-number">— 03</p>
-        <svg class="card-icon" viewBox="0 0 36 36" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
-          <circle cx="8" cy="18" r="3"/>
-          <circle cx="28" cy="9" r="3"/>
-          <circle cx="28" cy="27" r="3"/>
-          <line x1="11" y1="17" x2="25" y2="11"/>
-          <line x1="11" y1="19" x2="25" y2="25"/>
-        </svg>
-        <h3 class="card-title">Consulting</h3>
-        <p class="card-desc">Strategic creative direction for artists and brands. Navigate the new frontier with intent and intelligence.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section id="contact" class="content cta-section">
+<!-- Contact -->
+<section id="contact" class="content">
   <div class="section-inner" style="text-align:center">
-    <div class="section-eyebrow" style="justify-content:center">
-      <div class="eyebrow-line"></div>
-      <span class="eyebrow-text">Contact</span>
-      <div class="eyebrow-line"></div>
-    </div>
-    <h2 class="section-title">Initialize<br>Connection</h2>
-    <p class="cta-body">
-      Ready to transmit? We're tuned in — send your signal and let's build
-      something that exists beyond what's been heard before.
+    <p class="section-label" style="text-align:center">Get in Touch</p>
+    <h2 class="section-heading" style="margin-bottom:1.5rem">Connect</h2>
+    <p class="contact-body">
+      Want to collaborate, book an event, or just talk music?<br>
+      We're always tuned in.
     </p>
-    <a href="mailto:hello@circuit909.com" class="cta-btn">
-      <span>Establish Link</span>
-    </a>
+    <a href="mailto:hello@circuit909.com" class="btn-primary">Send a Message</a>
   </div>
 </section>
 
 <!-- Footer -->
 <footer>
-  <p class="footer-copy">&copy; 2026 Circuit 909. All systems nominal.</p>
-  <p class="footer-mark">C909</p>
+  <p class="footer-copy">&copy; 2026 Circuit 909</p>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/circuit909presents" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@circuit909" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+    </a>
+  </div>
 </footer>
 
 <script>
@@ -757,14 +688,14 @@ resize();
 window.addEventListener('resize', resize);
 
 const NODES = [];
-const COUNT = 50;
+const COUNT = 45;
 
 for (let i = 0; i < COUNT; i++) {
   NODES.push({
     x: Math.random() * innerWidth,
     y: Math.random() * innerHeight,
-    vx: (Math.random() - 0.5) * 0.25,
-    vy: (Math.random() - 0.5) * 0.25,
+    vx: (Math.random() - 0.5) * 0.2,
+    vy: (Math.random() - 0.5) * 0.2,
     phase: Math.random() * Math.PI * 2,
   });
 }
@@ -772,19 +703,17 @@ for (let i = 0; i < COUNT; i++) {
 function drawBg() {
   ctx.clearRect(0, 0, W, H);
 
-  // Connections with circuit-trace routing
   for (let i = 0; i < NODES.length; i++) {
     for (let j = i + 1; j < NODES.length; j++) {
       const a = NODES[i], b = NODES[j];
       const dx = b.x - a.x, dy = b.y - a.y;
       const dist = Math.hypot(dx, dy);
-      if (dist > 180) continue;
+      if (dist > 170) continue;
 
-      const alpha = (1 - dist / 180) * 0.18;
+      const alpha = (1 - dist / 170) * 0.15;
       ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
-      ctx.lineWidth = 0.6;
+      ctx.lineWidth = 0.5;
       ctx.beginPath();
-      // L-shaped trace
       const midX = a.x + dx * 0.5;
       ctx.moveTo(a.x, a.y);
       ctx.lineTo(midX, a.y);
@@ -794,26 +723,17 @@ function drawBg() {
     }
   }
 
-  // Nodes
   for (const n of NODES) {
-    n.phase += 0.018;
+    n.phase += 0.016;
     const pulse = (Math.sin(n.phase) + 1) / 2;
-    const alpha = 0.15 + pulse * 0.35;
-    const r = 1.5 + pulse * 2;
+    const alpha = 0.12 + pulse * 0.28;
+    const r = 1.2 + pulse * 1.8;
 
     ctx.fillStyle = `rgba(255,255,255,${alpha})`;
     ctx.beginPath();
     ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
     ctx.fill();
 
-    // Small glow ring
-    ctx.strokeStyle = `rgba(255,255,255,${alpha * 0.25})`;
-    ctx.lineWidth = 0.5;
-    ctx.beginPath();
-    ctx.arc(n.x, n.y, r + 5, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // Move
     n.x += n.vx;
     n.y += n.vy;
     if (n.x < -20 || n.x > W + 20) n.vx *= -1;
@@ -828,18 +748,16 @@ drawBg();
 //  LOGO COIN SPIN ON SCROLL
 // ═══════════════════════════════════════════════
 const coin = document.getElementById('logoCoin');
-const stage = coin.parentElement;
+const logoStage = coin.parentElement;
 
-let rotY = 0;         // current visual rotation (deg)
-let targetRotY = 0;   // where we're heading
+let rotY = 0;
+let targetRotY = 0;
 let rafSpin = null;
 
 function stepSpin() {
   const delta = targetRotY - rotY;
   rotY += delta * 0.09;
-
   coin.style.transform = `rotateY(${rotY}deg)`;
-
   if (Math.abs(delta) > 0.05) {
     rafSpin = requestAnimationFrame(stepSpin);
   } else {
@@ -850,44 +768,30 @@ function stepSpin() {
 }
 
 function triggerSpin(delta) {
-  // Each scroll increments rotation ~180° per big scroll tick
   const mag = Math.min(Math.abs(delta), 120);
   const dir = delta > 0 ? 1 : -1;
   targetRotY += dir * (90 + mag * 0.8);
-
-  if (!rafSpin) {
-    rafSpin = requestAnimationFrame(stepSpin);
-  }
+  if (!rafSpin) rafSpin = requestAnimationFrame(stepSpin);
 }
 
-// Wheel (desktop)
-window.addEventListener('wheel', (e) => {
-  triggerSpin(e.deltaY);
-}, { passive: true });
+window.addEventListener('wheel', (e) => { triggerSpin(e.deltaY); }, { passive: true });
 
-// Touch (mobile)
 let touchY0 = null;
-window.addEventListener('touchstart', (e) => {
-  touchY0 = e.touches[0].clientY;
-}, { passive: true });
-
+window.addEventListener('touchstart', (e) => { touchY0 = e.touches[0].clientY; }, { passive: true });
 window.addEventListener('touchmove', (e) => {
   if (touchY0 === null) return;
   const d = touchY0 - e.touches[0].clientY;
   touchY0 = e.touches[0].clientY;
   triggerSpin(d * 4);
 }, { passive: true });
-
 window.addEventListener('touchend', () => { touchY0 = null; });
 
-// ── Idle float animation ──
+// Idle float
 let floatAngle = 0;
-const logoStage = coin.parentElement;
-
 function idleFloat() {
-  floatAngle += 0.012;
-  const ty = Math.sin(floatAngle) * 10;
-  const tx = Math.sin(floatAngle * 0.6) * 3;
+  floatAngle += 0.011;
+  const ty = Math.sin(floatAngle) * 9;
+  const tx = Math.sin(floatAngle * 0.55) * 2.5;
   logoStage.style.transform = `translate(${tx}px, ${ty}px)`;
   requestAnimationFrame(idleFloat);
 }
@@ -897,20 +801,15 @@ idleFloat();
 //  SCROLL-IN REVEAL
 // ═══════════════════════════════════════════════
 const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
+  entries.forEach((e) => {
     if (e.isIntersecting) {
       e.target.classList.add('visible');
       revealObs.unobserve(e.target);
     }
   });
-}, { threshold: 0.15 });
+}, { threshold: 0.12 });
 
 document.querySelectorAll('[data-observe]').forEach(el => revealObs.observe(el));
-
-// ── Stagger delays for grid children ──
-document.querySelectorAll('.stats-grid .stat').forEach((el, i) => {
-  el.style.transitionDelay = `${i * 0.1}s`;
-});
 </script>
 </body>
 </html>
