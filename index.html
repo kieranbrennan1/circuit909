@@ -82,6 +82,16 @@ nav {
   gap: 1.2rem;
 }
 
+/* ── NAV WELCOME ── */
+.nav-welcome {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
 /* ── PROFILE BUTTON ── */
 .nav-profile-btn {
   display: flex;
@@ -912,11 +922,13 @@ footer {
     <img src="logo.png" alt="Circuit 909">
   </a>
   <ul class="nav-center">
-    <li><a href="#events">Events</a></li>
+    <li><a href="events.html">Events</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
+    <!-- Welcome text -->
+    <span class="nav-welcome" id="navWelcome" style="display:none"></span>
     <!-- Profile -->
     <div style="position:relative">
       <button class="nav-profile-btn" id="profileBtn" aria-label="Account">
@@ -1306,7 +1318,10 @@ footer {
       <button class="auth-submit" id="loginSubmit">Log In</button>
     </div>
     <div class="auth-panel" id="signupPanel">
-      <input class="auth-input" type="text" id="signupName" placeholder="Full Name" autocomplete="name">
+      <div style="display:flex;gap:0.6rem">
+        <input class="auth-input" type="text" id="signupFirstName" placeholder="First Name" autocomplete="given-name" style="flex:1">
+        <input class="auth-input" type="text" id="signupLastName" placeholder="Last Name" autocomplete="family-name" style="flex:1">
+      </div>
       <input class="auth-input" type="email" id="signupEmail" placeholder="Email" autocomplete="email">
       <input class="auth-input" type="password" id="signupPassword" placeholder="Password" autocomplete="new-password">
       <p class="auth-error" id="signupError">An account with this email already exists.</p>
@@ -1557,17 +1572,22 @@ let currentUser = JSON.parse(localStorage.getItem('c909_user') || 'null');
 function getUsers() { return JSON.parse(localStorage.getItem('c909_users') || '{}'); }
 function saveUsers(u) { localStorage.setItem('c909_users', JSON.stringify(u)); }
 
+const navWelcome = document.getElementById('navWelcome');
+
 function updateNavProfile() {
   if (currentUser) {
-    const initials = currentUser.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+    const initials = ((currentUser.firstName[0]||'') + (currentUser.lastName[0]||'')).toUpperCase();
     profileBtn.innerHTML = `<span class="initials">${initials}</span>`;
     profileBtn.style.background = 'rgba(255,255,255,0.12)';
-    profileName.textContent = currentUser.name;
+    profileName.textContent = `${currentUser.firstName} ${currentUser.lastName}`;
     profileDropdown.style.display = '';
+    navWelcome.textContent = `Welcome, ${currentUser.firstName}`;
+    navWelcome.style.display = 'inline';
   } else {
     profileBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>`;
     profileBtn.style.background = '';
     profileDropdown.style.display = 'none';
+    navWelcome.style.display = 'none';
   }
 }
 updateNavProfile();
@@ -1608,7 +1628,7 @@ document.getElementById('loginSubmit').addEventListener('click', () => {
   const users = getUsers();
   const err = document.getElementById('loginError');
   if (users[email] && users[email].password === btoa(pass)) {
-    currentUser = { name: users[email].name, email };
+    currentUser = { firstName: users[email].firstName, lastName: users[email].lastName, email };
     localStorage.setItem('c909_user', JSON.stringify(currentUser));
     authOverlay.classList.remove('open');
     updateNavProfile();
@@ -1620,16 +1640,17 @@ document.getElementById('loginSubmit').addEventListener('click', () => {
 
 // Sign up
 document.getElementById('signupSubmit').addEventListener('click', () => {
-  const name = document.getElementById('signupName').value.trim();
+  const firstName = document.getElementById('signupFirstName').value.trim();
+  const lastName = document.getElementById('signupLastName').value.trim();
   const email = document.getElementById('signupEmail').value.trim().toLowerCase();
   const pass = document.getElementById('signupPassword').value;
   const err = document.getElementById('signupError');
-  if (!name || !email || !pass) { err.textContent = 'Please fill in all fields.'; err.style.display = 'block'; return; }
+  if (!firstName || !lastName || !email || !pass) { err.textContent = 'Please fill in all fields.'; err.style.display = 'block'; return; }
   const users = getUsers();
   if (users[email]) { err.textContent = 'An account with this email already exists.'; err.style.display = 'block'; return; }
-  users[email] = { name, password: btoa(pass), tickets: [] };
+  users[email] = { firstName, lastName, password: btoa(pass), tickets: [] };
   saveUsers(users);
-  currentUser = { name, email };
+  currentUser = { firstName, lastName, email };
   localStorage.setItem('c909_user', JSON.stringify(currentUser));
   authOverlay.classList.remove('open');
   updateNavProfile();
