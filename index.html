@@ -43,12 +43,17 @@ nav {
 }
 
 .nav-brand {
-  font-family: 'Changa One', sans-serif;
-  font-size: 1.2rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #fff;
+  display: flex;
+  align-items: center;
   text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-brand img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .nav-center {
@@ -520,7 +525,9 @@ footer {
 
 <!-- Navigation -->
 <nav>
-  <a class="nav-brand" href="#">Circuit 909</a>
+  <a class="nav-brand" href="#">
+    <img src="logo.png" alt="Circuit 909">
+  </a>
   <ul class="nav-center">
     <li><a href="#events">Events</a></li>
     <li><a href="#about">About</a></li>
