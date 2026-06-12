@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circuit 909</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Exo+2:ital,wght@1,800;1,900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #000;
+  --white: #fff;
+  --dim: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── Canvas BG ── */
+#bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Scanlines ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.08) 3px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 1.8rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
+}
+
+.nav-brand {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #fff;
+  transition: width 0.35s ease;
+}
+
+.nav-links a:hover { color: #fff; }
+.nav-links a:hover::after { width: 100%; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  gap: 2.5rem;
+}
+
+/* ── LOGO COIN ── */
+.logo-stage {
+  perspective: 700px;
+  perspective-origin: 50% 50%;
+}
+
+.logo-coin {
+  width: 520px;
+  height: 267px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.05s linear;
+  position: relative;
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.logo-img-back {
+  transform: scaleX(-1);
+  opacity: 0.6;
+}
+
+.coin-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.coin-face.back {
+  transform: rotateY(180deg);
+  background: transparent;
+}
+
+.coin-face.front {
+  background: transparent;
+}
+
+/* No coin rim — logo floats clean */
+
+@keyframes rim-rotate {
+  to { transform: rotate(360deg); }
+}
+
+/* ── HERO TEXT ── */
+.hero-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2.8rem, 7vw, 6.5rem);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  position: relative;
+  text-align: center;
+  line-height: 1;
+}
+
+.hero-title::before,
+.hero-title::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-title::before {
+  color: rgba(0, 220, 255, 0.7);
+  animation: glitch-a 4s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+}
+
+.hero-title::after {
+  color: rgba(255, 0, 120, 0.7);
+  animation: glitch-b 4s infinite;
+  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-a {
+  0%, 88%, 100% { transform: translate(0); opacity: 0; }
+  89% { transform: translate(-4px, 1px); opacity: 0.8; }
+  91% { transform: translate(4px, -1px); opacity: 0.8; }
+  93% { transform: translate(-2px, 0); opacity: 0.5; }
+  95% { transform: translate(0); opacity: 0; }
+}
+
+@keyframes glitch-b {
+  0%, 88%, 100% { transform: translate(0); opacity: 0; }
+  90% { transform: translate(4px, 2px); opacity: 0.8; }
+  92% { transform: translate(-4px, -2px); opacity: 0.8; }
+  94% { transform: translate(2px, 0); opacity: 0.5; }
+  96% { transform: translate(0); opacity: 0; }
+}
+
+.hero-tagline {
+  font-size: 0.8rem;
+  letter-spacing: 0.6em;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ── SCROLL HINT ── */
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: default;
+}
+
+.scroll-hint-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
+}
+
+.scroll-arrow {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0));
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-arrow::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.8), rgba(255,255,255,0));
+  animation: drip 2s ease-in-out infinite;
+}
+
+@keyframes drip {
+  0% { top: -100%; }
+  100% { top: 200%; }
+}
+
+/* ── SECTIONS ── */
+section.content {
+  position: relative;
+  z-index: 1;
+  padding: 7rem 5rem;
+  border-top: 1px solid var(--border);
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow-line {
+  width: 40px;
+  height: 1px;
+  background: rgba(255,255,255,0.4);
+}
+
+.eyebrow-text {
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 3rem;
+}
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.about-text {
+  color: rgba(255,255,255,0.5);
+  font-size: 1.15rem;
+  line-height: 1.9;
+}
+
+.about-text strong {
+  color: rgba(255,255,255,0.85);
+  font-weight: 600;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+
+.stat {
+  background: #000;
+  padding: 2rem 1.5rem;
+  position: relative;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.stat.visible { opacity: 1; transform: translateY(0); }
+
+.stat::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 0;
+  background: #fff;
+  transition: height 0.6s ease 0.2s;
+}
+
+.stat.visible::before { height: 100%; }
+
+.stat-number {
+  font-family: 'Orbitron', monospace;
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+}
+
+/* ── SERVICES ── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+
+.service-card {
+  background: #000;
+  padding: 3rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s;
+}
+
+.service-card.visible { opacity: 1; transform: translateY(0); }
+
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: #fff;
+  transition: width 0.5s ease, left 0.5s ease;
+}
+
+.service-card:hover { background: rgba(255,255,255,0.03); }
+.service-card:hover::after { width: 100%; left: 0; }
+
+.card-number {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.4em;
+  margin-bottom: 2rem;
+}
+
+.card-icon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 1.5rem;
+  opacity: 0.6;
+}
+
+.card-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.9rem;
+  color: #fff;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+}
+
+.card-desc {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1.2rem 0;
+  overflow: hidden;
+  background: rgba(255,255,255,0.015);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}
+
+.marquee-item {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.marquee-item::after {
+  content: '//';
+  color: rgba(255,255,255,0.12);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── CTA ── */
+.cta-section {
+  text-align: center;
+}
+
+.cta-body {
+  color: rgba(255,255,255,0.4);
+  font-size: 1.1rem;
+  line-height: 1.9;
+  max-width: 540px;
+  margin: 0 auto 3rem;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 3rem;
+  border: 1px solid rgba(255,255,255,0.6);
+  color: #fff;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s, border-color 0.4s;
+}
+
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  transform: translateX(-101%);
+  transition: transform 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.cta-btn:hover { color: #000; border-color: #fff; }
+.cta-btn:hover::before { transform: translateX(0); }
+
+.cta-btn span { position: relative; z-index: 1; }
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.15em;
+}
+
+.footer-mark {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  color: rgba(255,255,255,0.15);
+}
+
+/* ── CORNER BRACKETS ── */
+.corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  opacity: 0.35;
+}
+
+.corner-tl { top: 0; left: 0; border-top: 1px solid #fff; border-left: 1px solid #fff; }
+.corner-tr { top: 0; right: 0; border-top: 1px solid #fff; border-right: 1px solid #fff; }
+.corner-bl { bottom: 0; left: 0; border-bottom: 1px solid #fff; border-left: 1px solid #fff; }
+.corner-br { bottom: 0; right: 0; border-bottom: 1px solid #fff; border-right: 1px solid #fff; }
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-brand">Circuit<span style="opacity:0.4;margin:0 0.4em;">/</span>909</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="logo-stage">
+    <div class="logo-coin" id="logoCoin">
+      <!-- Front face — your actual Circuit 909 logo -->
+      <div class="coin-face front">
+        <img src="logo.png" alt="Circuit 909" class="logo-img">
+      </div>
+
+      <!-- Back face — mirrored logo -->
+      <div class="coin-face back">
+        <img src="logo.png" alt="Circuit 909" class="logo-img logo-img-back">
+      </div>
+    </div>
+  </div>
+
+  <p class="hero-tagline">The Future of Sound &mdash; Engineered</p>
+
+  <div class="scroll-hint">
+    <span class="scroll-hint-text">Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee">
+    <span class="marquee-item">Sound Design</span>
+    <span class="marquee-item">Circuit 909</span>
+    <span class="marquee-item">Frequency</span>
+    <span class="marquee-item">Production</span>
+    <span class="marquee-item">909 BPM</span>
+    <span class="marquee-item">Futurism</span>
+    <span class="marquee-item">Engineering</span>
+    <span class="marquee-item">Signal Chain</span>
+    <span class="marquee-item">Sound Design</span>
+    <span class="marquee-item">Circuit 909</span>
+    <span class="marquee-item">Frequency</span>
+    <span class="marquee-item">Production</span>
+    <span class="marquee-item">909 BPM</span>
+    <span class="marquee-item">Futurism</span>
+    <span class="marquee-item">Engineering</span>
+    <span class="marquee-item">Signal Chain</span>
+  </div>
+</div>
+
+<!-- About -->
+<section id="about" class="content">
+  <div class="section-inner">
+    <div class="section-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">About</span>
+    </div>
+    <div class="about-grid">
+      <div>
+        <h2 class="section-title">Engineered<br>for the Edge</h2>
+        <p class="about-text">
+          Circuit 909 is a <strong>forward-thinking creative force</strong> operating at
+          the intersection of sound design, technology, and culture. Born from the machines
+          — refined in the underground.<br><br>
+          We exist where <strong>frequency meets future</strong>. Every beat is a
+          signal. Every signal is a statement. Precision-engineered for those who
+          live beyond the grid.
+        </p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat" data-observe>
+          <div class="stat-number">909</div>
+          <div class="stat-label">Max BPM</div>
+        </div>
+        <div class="stat" data-observe>
+          <div class="stat-number">0.1<span style="font-size:1.4rem">ms</span></div>
+          <div class="stat-label">Latency</div>
+        </div>
+        <div class="stat" data-observe>
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Possibilities</div>
+        </div>
+        <div class="stat" data-observe>
+          <div class="stat-number">24<span style="font-size:1.4rem">/7</span></div>
+          <div class="stat-label">Always On</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="content">
+  <div class="section-inner">
+    <div class="section-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Services</span>
+    </div>
+    <h2 class="section-title">What We<br>Transmit</h2>
+    <div class="services-grid">
+      <div class="service-card" data-observe>
+        <div class="corner corner-tl"></div>
+        <p class="card-number">— 01</p>
+        <svg class="card-icon" viewBox="0 0 36 36" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 18 Q9 8 14 18 Q19 28 24 18 Q29 8 32 18"/>
+          <circle cx="4" cy="18" r="1.5" fill="white" stroke="none"/>
+          <circle cx="32" cy="18" r="1.5" fill="white" stroke="none"/>
+        </svg>
+        <h3 class="card-title">Sound Design</h3>
+        <p class="card-desc">Sonic landscapes engineered from the ground up. Texture, depth, and dimension that cuts through noise.</p>
+      </div>
+      <div class="service-card" data-observe style="transition-delay:0.1s">
+        <p class="card-number">— 02</p>
+        <svg class="card-icon" viewBox="0 0 36 36" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
+          <rect x="4" y="10" width="28" height="16" rx="2"/>
+          <line x1="8" y1="14" x2="8" y2="22"/>
+          <line x1="12" y1="12" x2="12" y2="24"/>
+          <line x1="16" y1="15" x2="16" y2="21"/>
+          <line x1="20" y1="11" x2="20" y2="25"/>
+          <line x1="24" y1="14" x2="24" y2="22"/>
+          <line x1="28" y1="16" x2="28" y2="20"/>
+        </svg>
+        <h3 class="card-title">Production</h3>
+        <p class="card-desc">Full-spectrum music production — from concept to master. Zero compromise on dynamics or detail.</p>
+      </div>
+      <div class="service-card" data-observe style="transition-delay:0.2s">
+        <div class="corner corner-br"></div>
+        <p class="card-number">— 03</p>
+        <svg class="card-icon" viewBox="0 0 36 36" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="8" cy="18" r="3"/>
+          <circle cx="28" cy="9" r="3"/>
+          <circle cx="28" cy="27" r="3"/>
+          <line x1="11" y1="17" x2="25" y2="11"/>
+          <line x1="11" y1="19" x2="25" y2="25"/>
+        </svg>
+        <h3 class="card-title">Consulting</h3>
+        <p class="card-desc">Strategic creative direction for artists and brands. Navigate the new frontier with intent and intelligence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="content cta-section">
+  <div class="section-inner" style="text-align:center">
+    <div class="section-eyebrow" style="justify-content:center">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Contact</span>
+      <div class="eyebrow-line"></div>
+    </div>
+    <h2 class="section-title">Initialize<br>Connection</h2>
+    <p class="cta-body">
+      Ready to transmit? We're tuned in — send your signal and let's build
+      something that exists beyond what's been heard before.
+    </p>
+    <a href="mailto:hello@circuit909.com" class="cta-btn">
+      <span>Establish Link</span>
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p class="footer-copy">&copy; 2026 Circuit 909. All systems nominal.</p>
+  <p class="footer-mark">C909</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════
+//  CIRCUIT BOARD BACKGROUND
+// ═══════════════════════════════════════════════
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+let W, H;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const NODES = [];
+const COUNT = 50;
+
+for (let i = 0; i < COUNT; i++) {
+  NODES.push({
+    x: Math.random() * innerWidth,
+    y: Math.random() * innerHeight,
+    vx: (Math.random() - 0.5) * 0.25,
+    vy: (Math.random() - 0.5) * 0.25,
+    phase: Math.random() * Math.PI * 2,
+  });
+}
+
+function drawBg() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Connections with circuit-trace routing
+  for (let i = 0; i < NODES.length; i++) {
+    for (let j = i + 1; j < NODES.length; j++) {
+      const a = NODES[i], b = NODES[j];
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist > 180) continue;
+
+      const alpha = (1 - dist / 180) * 0.18;
+      ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+      ctx.lineWidth = 0.6;
+      ctx.beginPath();
+      // L-shaped trace
+      const midX = a.x + dx * 0.5;
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(midX, a.y);
+      ctx.lineTo(midX, b.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+    }
+  }
+
+  // Nodes
+  for (const n of NODES) {
+    n.phase += 0.018;
+    const pulse = (Math.sin(n.phase) + 1) / 2;
+    const alpha = 0.15 + pulse * 0.35;
+    const r = 1.5 + pulse * 2;
+
+    ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Small glow ring
+    ctx.strokeStyle = `rgba(255,255,255,${alpha * 0.25})`;
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, r + 5, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Move
+    n.x += n.vx;
+    n.y += n.vy;
+    if (n.x < -20 || n.x > W + 20) n.vx *= -1;
+    if (n.y < -20 || n.y > H + 20) n.vy *= -1;
+  }
+
+  requestAnimationFrame(drawBg);
+}
+drawBg();
+
+// ═══════════════════════════════════════════════
+//  LOGO COIN SPIN ON SCROLL
+// ═══════════════════════════════════════════════
+const coin = document.getElementById('logoCoin');
+const stage = coin.parentElement;
+
+let rotY = 0;         // current visual rotation (deg)
+let targetRotY = 0;   // where we're heading
+let rafSpin = null;
+
+function stepSpin() {
+  const delta = targetRotY - rotY;
+  rotY += delta * 0.09;
+
+  coin.style.transform = `rotateY(${rotY}deg)`;
+
+  if (Math.abs(delta) > 0.05) {
+    rafSpin = requestAnimationFrame(stepSpin);
+  } else {
+    rotY = targetRotY;
+    coin.style.transform = `rotateY(${rotY}deg)`;
+    rafSpin = null;
+  }
+}
+
+function triggerSpin(delta) {
+  // Each scroll increments rotation ~180° per big scroll tick
+  const mag = Math.min(Math.abs(delta), 120);
+  const dir = delta > 0 ? 1 : -1;
+  targetRotY += dir * (90 + mag * 0.8);
+
+  if (!rafSpin) {
+    rafSpin = requestAnimationFrame(stepSpin);
+  }
+}
+
+// Wheel (desktop)
+window.addEventListener('wheel', (e) => {
+  triggerSpin(e.deltaY);
+}, { passive: true });
+
+// Touch (mobile)
+let touchY0 = null;
+window.addEventListener('touchstart', (e) => {
+  touchY0 = e.touches[0].clientY;
+}, { passive: true });
+
+window.addEventListener('touchmove', (e) => {
+  if (touchY0 === null) return;
+  const d = touchY0 - e.touches[0].clientY;
+  touchY0 = e.touches[0].clientY;
+  triggerSpin(d * 4);
+}, { passive: true });
+
+window.addEventListener('touchend', () => { touchY0 = null; });
+
+// ── Idle float animation ──
+let floatAngle = 0;
+const logoStage = coin.parentElement;
+
+function idleFloat() {
+  floatAngle += 0.012;
+  const ty = Math.sin(floatAngle) * 10;
+  const tx = Math.sin(floatAngle * 0.6) * 3;
+  logoStage.style.transform = `translate(${tx}px, ${ty}px)`;
+  requestAnimationFrame(idleFloat);
+}
+idleFloat();
+
+// ═══════════════════════════════════════════════
+//  SCROLL-IN REVEAL
+// ═══════════════════════════════════════════════
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('[data-observe]').forEach(el => revealObs.observe(el));
+
+// ── Stagger delays for grid children ──
+document.querySelectorAll('.stats-grid .stat').forEach((el, i) => {
+  el.style.transitionDelay = `${i * 0.1}s`;
+});
+</script>
+</body>
+</html>
