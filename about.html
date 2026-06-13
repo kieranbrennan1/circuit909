@@ -481,13 +481,14 @@ footer.visible { opacity: 1; pointer-events: auto; }
 
 .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; flex-shrink: 0; }
 .nav-hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.8); border-radius: 1px; }
-.mobile-menu { display: none; position: fixed; top: 90px; left: 0; right: 0; background: rgba(0,0,0,0.97); z-index: 99; flex-direction: column; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.mobile-menu { display: none; position: fixed; top: 90px; left: 0; right: 0; background: #000; z-index: 99; flex-direction: column; border-bottom: 1px solid rgba(255,255,255,0.08); }
 .mobile-menu a { font-family: 'Lato', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.65); text-decoration: none; padding: 1.2rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.06); display: block; transition: color 0.2s; }
 .mobile-menu a:last-child { border-bottom: none; }
 .mobile-menu a:hover, .mobile-menu a.active { color: #fff; }
 @media (max-width: 600px) {
   .nav-hamburger { display: flex; }
   .mobile-menu.open { display: flex; }
+  nav.menu-open { background: #000; }
   .nav-center { display: none; }
   .nav-brand { position: absolute; left: 50%; transform: translateX(-50%); }
   .nav-profile-btn svg { width: 13px; height: 13px; }
@@ -534,7 +535,7 @@ footer.visible { opacity: 1; pointer-events: auto; }
   <a href="about.html" class="active">About</a>
   <a href="contact.html">Contact</a>
 </div>
-<script>(function(){var b=document.getElementById('navHamburger'),m=document.getElementById('mobileMenu');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script>(function(){var b=document.getElementById('navHamburger'),m=document.getElementById('mobileMenu'),n=document.querySelector('nav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');if(n)n.classList.toggle('menu-open');});})();</script>
 
 <div class="page-header">
   <div class="page-header-inner">
