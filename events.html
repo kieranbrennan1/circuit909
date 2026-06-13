@@ -524,6 +524,24 @@ section.content {
   border-top: 1px solid rgba(255,255,255,0.08);
 }
 
+/* show more button */
+.show-more-btn {
+  display: block;
+  margin: 2.5rem auto 0;
+  padding: 0.85rem 2.5rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.55);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s;
+}
+.show-more-btn:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+
 /* ── FOOTER ── */
 footer {
   position: relative;
@@ -892,6 +910,23 @@ const revealObs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 document.querySelectorAll('[data-observe]').forEach(el => revealObs.observe(el));
+
+// Show more
+function initShowMore(grid) {
+  const cards = Array.from(grid.querySelectorAll('.event-card'));
+  if (cards.length <= 6) return;
+  const extra = cards.slice(6);
+  extra.forEach(c => { c.style.display = 'none'; revealObs.unobserve(c); });
+  const btn = document.createElement('button');
+  btn.className = 'show-more-btn';
+  btn.textContent = 'Show More';
+  grid.after(btn);
+  btn.addEventListener('click', () => {
+    extra.forEach(c => { c.style.display = ''; requestAnimationFrame(() => revealObs.observe(c)); });
+    btn.remove();
+  });
+}
+document.querySelectorAll('.events-grid').forEach(initShowMore);
 
 // ── AUTH + PROFILE ──
 const profileBtn = document.getElementById('profileBtn');
