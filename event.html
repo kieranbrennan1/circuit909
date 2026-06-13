@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Events — Circuit 909</title>
+<title>Event — Circuit 909</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Changa+One:ital@0;1&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -28,14 +28,12 @@ nav {
   align-items: center;
   background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
 }
-
 .nav-brand {
   display: flex;
   align-items: center;
   text-decoration: none;
   flex-shrink: 0;
 }
-
 .nav-brand img {
   height: 56px;
   width: auto;
@@ -43,7 +41,6 @@ nav {
   display: block;
   image-rendering: -webkit-optimize-contrast;
 }
-
 .nav-center {
   display: flex;
   gap: 2.5rem;
@@ -52,7 +49,6 @@ nav {
   left: 50%;
   transform: translateX(-50%);
 }
-
 .nav-center a {
   color: rgba(255,255,255,0.7);
   text-decoration: none;
@@ -63,16 +59,13 @@ nav {
   text-transform: uppercase;
   transition: color 0.25s;
 }
-
 .nav-center a:hover { color: #fff; }
 .nav-center a.active { color: #fff; }
-
 .nav-right {
   display: flex;
   align-items: center;
   gap: 1.2rem;
 }
-
 .nav-social {
   display: flex;
   align-items: center;
@@ -81,10 +74,8 @@ nav {
   transition: color 0.25s;
   text-decoration: none;
 }
-
 .nav-social:hover { color: #fff; }
 .nav-social svg { width: 20px; height: 20px; fill: currentColor; }
-
 .nav-welcome {
   font-family: 'Lato', sans-serif;
   font-size: 0.78rem;
@@ -307,230 +298,133 @@ nav {
 }
 .tickets-empty a:hover { color: #fff; }
 
-/* ── PAGE HEADER ── */
-.page-header {
+/* ── EVENT HERO ── */
+.event-hero {
   position: relative;
-  z-index: 1;
-  padding: 10rem 3rem 4rem;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.page-header-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.page-label {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.35em;
-  color: rgba(255,255,255,0.35);
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-
-.page-title {
-  font-family: 'Changa One', sans-serif;
-  font-size: clamp(3rem, 8vw, 6rem);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #fff;
-  line-height: 1;
-}
-
-/* ── SECTIONS ── */
-section.content {
-  position: relative;
-  z-index: 1;
-  padding: 5rem 3rem;
-}
-
-.section-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.section-label {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.35em;
-  color: rgba(255,255,255,0.35);
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-
-.section-heading {
-  font-family: 'Changa One', sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #fff;
-  line-height: 1;
-  margin-bottom: 3rem;
-}
-
-/* ── EVENTS GRID ── */
-.events-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-.event-card {
-  position: relative;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  background: #111;
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.event-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.event-card-bg {
-  position: absolute;
-  inset: 0;
+  height: 72vh;
+  min-height: 440px;
+  background-color: #0a0a0a;
   background-size: cover;
   background-position: center top;
-  transition: transform 0.6s ease;
+  display: flex;
+  align-items: flex-end;
 }
-
-.event-card:hover .event-card-bg {
-  transform: scale(1.05);
-}
-
-.event-card-overlay {
+.event-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0.25) 0%,
+    rgba(0,0,0,0.0) 30%,
+    rgba(10,10,10,0.75) 70%,
+    rgba(10,10,10,1) 100%);
+}
+.event-hero-info {
+  position: relative;
   z-index: 2;
+  padding: 2.5rem 3rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-
-.event-card-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.8rem;
-  z-index: 3;
-}
-
-.event-date {
+.event-hero-label {
   font-family: 'Lato', sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.25em;
-  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.32em;
+  color: rgba(255,255,255,0.45);
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.55rem;
 }
-
-.event-name {
+.event-hero-title {
   font-family: 'Changa One', sans-serif;
-  font-size: 1.35rem;
-  letter-spacing: 0.03em;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #fff;
-  line-height: 1.15;
-  margin-bottom: 0.4rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1;
 }
 
-.event-artists {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 400;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.5;
-  margin-bottom: 0.6rem;
-  text-transform: uppercase;
+/* ── EVENT DETAIL ── */
+.event-detail {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 3rem 7rem;
 }
-
-.event-venue {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.72rem;
-  color: rgba(255,255,255,0.35);
-  letter-spacing: 0.05em;
-}
-
-/* circuit pattern overlay */
-.event-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 30px 30px;
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* upcoming placeholder card */
-.event-card.placeholder .event-card-bg {
-  background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
-}
-
-.upcoming-tba {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
+.event-back {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  z-index: 3;
-  gap: 0.75rem;
-}
-
-.tba-label {
-  font-family: 'Changa One', sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.2);
-}
-
-.tba-sub {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.12);
-}
-
-/* section divider */
-.section-divider {
-  border: none;
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-
-/* show more button */
-.show-more-btn {
-  display: block;
-  margin: 2.5rem auto 0;
-  padding: 0.85rem 2.5rem;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.25);
-  color: rgba(255,255,255,0.55);
+  gap: 0.45rem;
   font-family: 'Lato', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  cursor: pointer;
-  transition: color 0.25s, border-color 0.25s;
+  color: rgba(255,255,255,0.3);
+  text-decoration: none;
+  margin-bottom: 3rem;
+  transition: color 0.2s;
 }
-.show-more-btn:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+.event-back:hover { color: rgba(255,255,255,0.7); }
+.event-back svg { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 2.5rem;
+  margin-bottom: 3rem;
+}
+.event-meta-row { display: flex; flex-direction: column; gap: 0.35rem; }
+.event-meta-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+}
+.event-meta-value {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.97rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.82);
+  letter-spacing: 0.02em;
+  line-height: 1.65;
+  text-transform: uppercase;
+}
+
+.event-cta {
+  display: block;
+  width: 100%;
+  padding: 1.15rem 2.5rem;
+  background: #fff;
+  color: #000;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.25s;
+}
+.event-cta:hover { background: rgba(255,255,255,0.87); }
+.event-cta.past {
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.event-cta.past:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+
+.event-not-found {
+  text-align: center;
+  padding: 10rem 2rem;
+  color: rgba(255,255,255,0.25);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+}
 
 /* ── FOOTER ── */
 footer {
@@ -544,27 +438,23 @@ footer {
   flex-wrap: wrap;
   gap: 1rem;
 }
-
 .footer-copy {
   font-size: 0.78rem;
   color: rgba(255,255,255,0.2);
   font-weight: 300;
   letter-spacing: 0.05em;
 }
-
 .footer-social {
   display: flex;
   gap: 1.2rem;
   align-items: center;
 }
-
 .footer-social a {
   color: rgba(255,255,255,0.25);
   transition: color 0.25s;
   text-decoration: none;
   display: flex;
 }
-
 .footer-social a:hover { color: rgba(255,255,255,0.7); }
 .footer-social svg { width: 18px; height: 18px; fill: currentColor; }
 
@@ -572,21 +462,19 @@ footer {
 @media (max-width: 900px) {
   nav { padding: 1.2rem 1.5rem; }
   .nav-center { gap: 1.5rem; }
-  .events-grid { grid-template-columns: repeat(2, 1fr); }
-  section.content { padding: 4rem 1.5rem; }
-  .page-header { padding: 8rem 1.5rem 3rem; }
+  .event-hero { height: 56vh; }
+  .event-hero-info { padding: 2rem 1.5rem; }
+  .event-detail { padding: 2.5rem 1.5rem 5rem; }
 }
-
 @media (max-width: 600px) {
   .nav-center { display: none; }
-  .events-grid { grid-template-columns: 1fr; }
+  .event-hero { height: 48vh; min-height: 320px; }
   footer { flex-direction: column; text-align: center; }
 }
 </style>
 </head>
 <body>
 
-<!-- Navigation -->
 <nav>
   <a class="nav-brand" href="index.html">
     <img src="logo.png" alt="Circuit 909">
@@ -617,178 +505,23 @@ footer {
   </div>
 </nav>
 
-<!-- Page Header -->
-<div class="page-header">
-  <div class="page-header-inner">
-    <p class="page-label">Circuit 909 Presents</p>
-    <h1 class="page-title">Events</h1>
+<div id="eventHero" class="event-hero">
+  <div class="event-hero-overlay"></div>
+  <div class="event-hero-info">
+    <p class="event-hero-label" id="heroLabel"></p>
+    <h1 class="event-hero-title" id="heroTitle"></h1>
   </div>
 </div>
 
-<!-- Upcoming Events -->
-<section class="content">
-  <div class="section-inner">
-    <p class="section-label">What's Next</p>
-    <h2 class="section-heading">Upcoming Events</h2>
-    <div class="events-grid">
+<div class="event-detail" id="eventDetail">
+  <a href="events.html" class="event-back">
+    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    Back to Events
+  </a>
+  <div class="event-meta" id="eventMeta"></div>
+  <a id="eventCta" class="event-cta" target="_blank" rel="noopener"></a>
+</div>
 
-
-      <div class="event-card" data-id="jun20" data-observe>
-        <div class="event-card-bg" style="background-image: url('azure-jun20.jpg'); background-size: cover; background-position: center top;"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Jun 20 &nbsp;·&nbsp; 3:00 PM</p>
-          <h3 class="event-name">Azure Day Party</h3>
-          <p class="event-artists">Night Tales · Sebastian Fabrice · Amor · Trill · Smothers</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; Columbus, OH</p>
-        </div>
-      </div>
-
-      <div class="event-card" data-id="jun27" data-observe style="transition-delay:0.1s">
-        <div class="event-card-bg" style="background-image: url('azure-jun27.jpg'); background-size: cover; background-position: center top;"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Jun 27 &nbsp;·&nbsp; 3:00 PM</p>
-          <h3 class="event-name">Azure Day Party</h3>
-          <p class="event-artists">TESH · Seb Fudala · UVA · DJ Axcess · Must Be Nik · Nico PS</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; Columbus, OH</p>
-        </div>
-      </div>
-
-
-      <div class="event-card" data-id="jul12" data-observe style="transition-delay:0.2s">
-        <div class="event-card-bg" style="background-image: url('azure-jul12.jpg'); background-size: cover; background-position: center top;"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Jul 12 &nbsp;·&nbsp; 3:00 PM</p>
-          <h3 class="event-name">Azure Day Party</h3>
-          <p class="event-artists">Bobby Booshay · Mike James · Tex B2B Vaughn · DJ Cale · JustaJ</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; Columbus, OH</p>
-        </div>
-      </div>
-
-
-      <div class="event-card" data-id="jul25" data-observe>
-        <div class="event-card-bg" style="background-image: url('azure-jul25.jpg'); background-size: cover; background-position: center top;"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Jul 25 &nbsp;·&nbsp; 3:00 PM</p>
-          <h3 class="event-name">Azure Day Party</h3>
-          <p class="event-artists">Sons · Trill · Ben Basta · Cookies N Kreme · Cuzzin</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; Columbus, OH</p>
-        </div>
-      </div>
-
-
-      <div class="event-card" data-id="aug1" data-observe style="transition-delay:0.1s">
-        <div class="event-card-bg" style="background-image: url('azure-aug1.jpg'); background-size: cover; background-position: center top;"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Aug 1 &nbsp;·&nbsp; 3:00 PM</p>
-          <h3 class="event-name">Azure Day Party</h3>
-          <p class="event-artists">Gudfella · Sceneamatix · Juice · Mike Dow · Sassy P</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; Columbus, OH</p>
-        </div>
-      </div>
-
-
-
-      <div class="event-card" data-id="aug16" data-observe style="transition-delay:0.2s">
-        <div class="event-card-bg" style="background-image: url('azure-aug16.jpg'); background-size: cover; background-position: center top;"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Aug 16 &nbsp;·&nbsp; 3:00 PM</p>
-          <h3 class="event-name">Azure Day Party</h3>
-          <p class="event-artists">Rick Wonder · Yael · Greeves · Joe G · Jhon</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; Columbus, OH</p>
-        </div>
-      </div>
-
-      <div class="event-card" data-id="aug22" data-observe>
-        <div class="event-card-bg" style="background-image: url('azure-aug22.jpg'); background-size: cover; background-position: center top;"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Aug 22 &nbsp;·&nbsp; 3:00 PM</p>
-          <h3 class="event-name">Azure Day Party</h3>
-          <p class="event-artists">No Static · Behold · Tweety · Fear &amp; Lowe · Tano</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; Columbus, OH</p>
-        </div>
-      </div>
-
-      <div class="event-card" data-id="aug29" data-observe style="transition-delay:0.1s">
-        <div class="event-card-bg" style="background-image: url('azure-aug29.jpg'); background-size: cover; background-position: center top;"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Aug 29 &nbsp;·&nbsp; 3:00 PM</p>
-          <h3 class="event-name">Azure Day Party</h3>
-          <p class="event-artists">Luke Alexander · Sons · Nik Ryan · Nev · Oli B2B Sassy P</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; Columbus, OH</p>
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-</section>
-
-<hr class="section-divider">
-
-<!-- Past Events -->
-<section class="content">
-  <div class="section-inner">
-    <p class="section-label">Previously</p>
-    <h2 class="section-heading">Past Events</h2>
-    <div class="events-grid">
-
-      <div class="event-card" data-id="oct26" data-observe>
-        <div class="event-card-bg" style="background-image: url('event-am.avif');"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Oct 26 &nbsp;·&nbsp; 11AM – 4PM</p>
-          <h3 class="event-name">Circuit AM</h3>
-          <p class="event-artists">Sons · Sebastian Fabrice · Yael · Oli<br>Chobe B2B Merchant · J Hon</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; 808 N High St, Columbus</p>
-        </div>
-      </div>
-
-      <div class="event-card" data-id="jan31" data-observe style="transition-delay:0.1s">
-        <div class="event-card-bg" style="background-image: url('event-pm.avif');"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Jan 31 &nbsp;·&nbsp; 3PM – 8PM</p>
-          <h3 class="event-name">Circuit PM</h3>
-          <p class="event-artists">Sons · Oli B2B Sassy P · Sceneamatix<br>Sebastian Fabrice · Penthouse</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; 808 N High St, Columbus</p>
-        </div>
-      </div>
-
-      <div class="event-card" data-id="feb19" data-observe style="transition-delay:0.2s">
-        <div class="event-card-bg" style="background-image: url('event-eviction.avif');"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Feb 19 &nbsp;·&nbsp; 8PM – 2AM</p>
-          <h3 class="event-name">Eviction Notice</h3>
-          <p class="event-artists">Oli · Sassy P · Flurry<br>Bella Grazia · Sebastian Fabrice</p>
-          <p class="event-venue">Apt. B / Bodega &nbsp;·&nbsp; 1044 N High St, Columbus</p>
-        </div>
-      </div>
-
-      <div class="event-card" data-id="jun5" data-observe style="transition-delay:0.3s">
-        <div class="event-card-bg" style="background-image: url('azure-jun5.jpg'); background-size: cover; background-position: center top;"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Jun 5 &nbsp;·&nbsp; 3:00 PM</p>
-          <h3 class="event-name">Azure Day Party</h3>
-          <p class="event-artists">OKAYVAL</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; Columbus, OH</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
 <footer>
   <p class="footer-copy">&copy; 2026 Circuit 909</p>
   <div class="footer-social">
@@ -841,41 +574,173 @@ footer {
 </div>
 
 <script>
-// Scroll reveal
-const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('[data-observe]').forEach(el => revealObs.observe(el));
-
-// Show more
-function initShowMore(grid) {
-  const cards = Array.from(grid.querySelectorAll('.event-card'));
-  if (cards.length <= 6) return;
-  const extra = cards.slice(6);
-
-  function collapse() {
-    extra.forEach(c => { c.style.display = 'none'; revealObs.unobserve(c); });
-    const moreBtn = document.createElement('button');
-    moreBtn.className = 'show-more-btn';
-    moreBtn.textContent = 'Show More';
-    grid.after(moreBtn);
-    moreBtn.addEventListener('click', () => { moreBtn.remove(); expand(); });
+// ── EVENT DATA ──
+// To add a new event: add an entry here, then add data-id="your-key" to the card in events.html
+const EVENTS = {
+  'oct26': {
+    image: 'event-am.avif',
+    date: 'Oct 26',
+    time: '11AM – 4PM',
+    name: 'Circuit AM',
+    artists: ['Sons', 'Sebastian Fabrice', 'Yael', 'Oli', 'Chobe B2B Merchant', 'J Hon'],
+    venue: 'Moxy Terrace · 808 N High St, Columbus',
+    posh: 'https://posh.vip/e/circuit-am',
+    past: true
+  },
+  'jan31': {
+    image: 'event-pm.avif',
+    date: 'Jan 31',
+    time: '3PM – 8PM',
+    name: 'Circuit PM',
+    artists: ['Sons', 'Oli B2B Sassy P', 'Sceneamatix', 'Sebastian Fabrice', 'Penthouse'],
+    venue: 'Moxy Terrace · 808 N High St, Columbus',
+    posh: 'https://posh.vip/e/circuitpm',
+    past: true
+  },
+  'feb19': {
+    image: 'event-eviction.avif',
+    date: 'Feb 19',
+    time: '8PM – 2AM',
+    name: 'Eviction Notice',
+    artists: ['Oli', 'Sassy P', 'Flurry', 'Bella Grazia', 'Sebastian Fabrice'],
+    venue: 'Apt. B / Bodega · 1044 N High St, Columbus',
+    posh: 'https://posh.vip/e/eviction-notice-apt-b-1',
+    past: true
+  },
+  'jun5': {
+    image: 'azure-jun5.jpg',
+    date: 'Jun 5',
+    time: '3:00 PM',
+    name: 'Azure Day Party',
+    artists: ['OKAYVAL'],
+    venue: 'Moxy Terrace · Columbus, OH',
+    posh: 'https://posh.vip/e/azure-day-party-columbus-620-wnight-tales-2',
+    past: true
+  },
+  'jun20': {
+    image: 'azure-jun20.jpg',
+    date: 'Jun 20',
+    time: '3:00 PM',
+    name: 'Azure Day Party',
+    artists: ['Night Tales', 'Sebastian Fabrice', 'Amor', 'Trill', 'Smothers'],
+    venue: 'Moxy Terrace · Columbus, OH',
+    posh: 'https://posh.vip/e/azure-day-party-523-w-night-tales-2',
+    past: false
+  },
+  'jun27': {
+    image: 'azure-jun27.jpg',
+    date: 'Jun 27',
+    time: '3:00 PM',
+    name: 'Azure Day Party',
+    artists: ['TESH', 'Seb Fudala', 'UVA', 'DJ Axcess', 'Must Be Nik', 'Nico PS'],
+    venue: 'Moxy Terrace · Columbus, OH',
+    posh: 'https://posh.vip/e/azure-day-party-columbus-627-w-tesh',
+    past: false
+  },
+  'jul12': {
+    image: 'azure-jul12.jpg',
+    date: 'Jul 12',
+    time: '3:00 PM',
+    name: 'Azure Day Party',
+    artists: ['Bobby Booshay', 'Mike James', 'Tex B2B Vaughn', 'DJ Cale', 'JustaJ'],
+    venue: 'Moxy Terrace · Columbus, OH',
+    posh: 'https://posh.vip/e/azure-day-party-columbus-712-wbobby-booshay',
+    past: false
+  },
+  'jul25': {
+    image: 'azure-jul25.jpg',
+    date: 'Jul 25',
+    time: '3:00 PM',
+    name: 'Azure Day Party',
+    artists: ['Sons', 'Trill', 'Ben Basta', 'Cookies N Kreme', 'Cuzzin'],
+    venue: 'Moxy Terrace · Columbus, OH',
+    posh: 'https://posh.vip/e/azure-day-party-columbus-725-wsons',
+    past: false
+  },
+  'aug1': {
+    image: 'azure-aug1.jpg',
+    date: 'Aug 1',
+    time: '3:00 PM',
+    name: 'Azure Day Party',
+    artists: ['Gudfella', 'Sceneamatix', 'Juice', 'Mike Dow', 'Sassy P'],
+    venue: 'Moxy Terrace · Columbus, OH',
+    posh: 'https://posh.vip/e/azure-day-party-columbus-81-wgudfella-1',
+    past: false
+  },
+  'aug16': {
+    image: 'azure-aug16.jpg',
+    date: 'Aug 16',
+    time: '3:00 PM',
+    name: 'Azure Day Party',
+    artists: ['Rick Wonder', 'Yael', 'Greeves', 'Joe G', 'Jhon'],
+    venue: 'Moxy Terrace · Columbus, OH',
+    posh: 'https://posh.vip/e/azure-day-party-columbus-816-lineup-tba',
+    past: false
+  },
+  'aug22': {
+    image: 'azure-aug22.jpg',
+    date: 'Aug 22',
+    time: '3:00 PM',
+    name: 'Azure Day Party',
+    artists: ['No Static', 'Behold', 'Tweety', 'Fear & Lowe', 'Tano'],
+    venue: 'Moxy Terrace · Columbus, OH',
+    posh: 'https://posh.vip/e/azure-day-party-columbus-822-lineup-tba',
+    past: false
+  },
+  'aug29': {
+    image: 'azure-aug29.jpg',
+    date: 'Aug 29',
+    time: '3:00 PM',
+    name: 'Azure Day Party',
+    artists: ['Luke Alexander', 'Sons', 'Nik Ryan', 'Nev', 'Oli B2B Sassy P'],
+    venue: 'Moxy Terrace · Columbus, OH',
+    posh: 'https://posh.vip/e/azure-day-party-columbus-718-wambrose-1',
+    past: false
   }
+};
 
-  function expand() {
-    extra.forEach(c => { c.style.display = ''; requestAnimationFrame(() => revealObs.observe(c)); });
-    const lessBtn = document.createElement('button');
-    lessBtn.className = 'show-more-btn';
-    lessBtn.textContent = 'Show Less';
-    grid.after(lessBtn);
-    lessBtn.addEventListener('click', () => { lessBtn.remove(); collapse(); });
+// ── RENDER EVENT ──
+const params = new URLSearchParams(window.location.search);
+const id = params.get('id');
+const ev = EVENTS[id];
+
+if (ev) {
+  document.title = ev.name + ' — Circuit 909';
+
+  const hero = document.getElementById('eventHero');
+  hero.style.backgroundImage = `url('${ev.image}')`;
+
+  document.getElementById('heroLabel').textContent = ev.date + ' · ' + ev.time;
+  document.getElementById('heroTitle').textContent = ev.name;
+
+  const meta = document.getElementById('eventMeta');
+  meta.innerHTML = `
+    <div class="event-meta-row">
+      <span class="event-meta-label">Date &amp; Time</span>
+      <span class="event-meta-value">${ev.date} · ${ev.time}</span>
+    </div>
+    <div class="event-meta-row">
+      <span class="event-meta-label">Venue</span>
+      <span class="event-meta-value">${ev.venue}</span>
+    </div>
+    <div class="event-meta-row">
+      <span class="event-meta-label">Lineup</span>
+      <span class="event-meta-value">${ev.artists.join(' · ')}</span>
+    </div>
+  `;
+
+  const cta = document.getElementById('eventCta');
+  cta.href = ev.posh;
+  if (ev.past) {
+    cta.textContent = 'View Event';
+    cta.classList.add('past');
+  } else {
+    cta.textContent = 'Buy Tickets';
   }
-
-  collapse();
+} else {
+  document.getElementById('eventHero').style.display = 'none';
+  document.getElementById('eventDetail').innerHTML = '<p class="event-not-found">Event not found. <a href="events.html" style="color:rgba(255,255,255,0.5);text-decoration:underline">Back to Events</a></p>';
 }
-document.querySelectorAll('.events-grid').forEach(initShowMore);
 
 // ── AUTH + PROFILE ──
 const profileBtn = document.getElementById('profileBtn');
@@ -971,11 +836,6 @@ document.getElementById('ticketsBtn').addEventListener('click', (e) => {
   profileDropdown.classList.remove('open');
   document.getElementById('ticketsUserSub').textContent = currentUser.email;
   ticketsOverlay.classList.add('open');
-});
-
-// Navigate to event detail page — add data-id="..." to any event card div to make it clickable
-document.querySelectorAll('.event-card[data-id]').forEach(card => {
-  card.addEventListener('click', () => { window.location.href = 'event.html?id=' + card.dataset.id; });
 });
 </script>
 </body>
