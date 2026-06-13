@@ -1020,24 +1020,17 @@ footer {
     </div>
   </div>
   <div class="gallery-strip">
-    <div class="gallery-track">
-      <img src="gallery-1.jpg" alt="Circuit 909 Event">
-      <img src="gallery-2.jpg" alt="Circuit 909 Event">
-      <img src="gallery-3.jpg" alt="Circuit 909 Event">
-      <img src="gallery-4.jpg" alt="Circuit 909 Event">
-      <img src="gallery-5.jpg" alt="Circuit 909 Event">
-      <img src="gallery-6.jpg" alt="Circuit 909 Event">
-      <img src="gallery-7.jpg" alt="Circuit 909 Event">
-      <img src="gallery-1.jpg" alt="Circuit 909 Event">
-      <img src="gallery-2.jpg" alt="Circuit 909 Event">
-      <img src="gallery-3.jpg" alt="Circuit 909 Event">
-      <img src="gallery-4.jpg" alt="Circuit 909 Event">
-      <img src="gallery-5.jpg" alt="Circuit 909 Event">
-      <img src="gallery-6.jpg" alt="Circuit 909 Event">
-      <img src="gallery-7.jpg" alt="Circuit 909 Event">
-    </div>
+    <div class="gallery-track" id="galleryTrack"></div>
   </div>
 </section>
+<script>
+(function(){
+  var imgs=['gallery-1.jpg','gallery-2.jpg','gallery-3.jpg','gallery-4.jpg','gallery-5.jpg','gallery-6.jpg','gallery-7.jpg','gallery-8.jpg','gallery-9.jpg','gallery-10.jpg','gallery-11.jpg','gallery-12.jpg'];
+  for(var i=imgs.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=imgs[i];imgs[i]=imgs[j];imgs[j]=t;}
+  var track=document.getElementById('galleryTrack');
+  imgs.concat(imgs).forEach(function(src){var el=document.createElement('img');el.src=src;el.alt='Circuit 909 Event';track.appendChild(el);});
+})();
+</script>
 
 <!-- Contact -->
 <section id="contact" class="content">
