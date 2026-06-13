@@ -16,16 +16,6 @@ body {
   overflow-x: hidden;
 }
 
-#bg {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.35;
-}
-
 nav {
   position: fixed;
   top: 0;
@@ -491,8 +481,6 @@ footer {
 </head>
 <body>
 
-<canvas id="bg"></canvas>
-
 <nav>
   <a class="nav-brand" href="index.html">
     <img src="logo.png" alt="Circuit 909">
@@ -618,55 +606,6 @@ footer {
 </div>
 
 <script>
-const canvas = document.getElementById('bg');
-const ctx = canvas.getContext('2d');
-let W, H;
-function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-resize();
-window.addEventListener('resize', resize);
-
-const NODES = [];
-for (let i = 0; i < 45; i++) {
-  NODES.push({ x: Math.random() * innerWidth, y: Math.random() * innerHeight, vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2, phase: Math.random() * Math.PI * 2 });
-}
-
-function drawBg() {
-  ctx.clearRect(0, 0, W, H);
-  for (let i = 0; i < NODES.length; i++) {
-    for (let j = i + 1; j < NODES.length; j++) {
-      const a = NODES[i], b = NODES[j];
-      const dx = b.x - a.x, dy = b.y - a.y;
-      const dist = Math.hypot(dx, dy);
-      if (dist > 170) continue;
-      const alpha = (1 - dist / 170) * 0.15;
-      ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
-      ctx.lineWidth = 0.5;
-      ctx.beginPath();
-      const midX = a.x + dx * 0.5;
-      ctx.moveTo(a.x, a.y);
-      ctx.lineTo(midX, a.y);
-      ctx.lineTo(midX, b.y);
-      ctx.lineTo(b.x, b.y);
-      ctx.stroke();
-    }
-  }
-  for (const n of NODES) {
-    n.phase += 0.016;
-    const pulse = (Math.sin(n.phase) + 1) / 2;
-    const alpha = 0.12 + pulse * 0.28;
-    const r = 1.2 + pulse * 1.8;
-    ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-    ctx.beginPath();
-    ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-    ctx.fill();
-    n.x += n.vx; n.y += n.vy;
-    if (n.x < -20 || n.x > W + 20) n.vx *= -1;
-    if (n.y < -20 || n.y > H + 20) n.vy *= -1;
-  }
-  requestAnimationFrame(drawBg);
-}
-drawBg();
-
 // ── AUTH + PROFILE ──
 const profileBtn = document.getElementById('profileBtn');
 const profileDropdown = document.getElementById('profileDropdown');
