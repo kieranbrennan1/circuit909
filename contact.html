@@ -437,7 +437,11 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
 }
+footer.visible { opacity: 1; pointer-events: auto; }
 
 .footer-copy {
   font-size: 0.78rem;
@@ -708,5 +712,6 @@ document.getElementById('ticketsBtn').addEventListener('click', (e) => {
   ticketsOverlay.classList.add('open');
 });
 </script>
+<script>(function(){var f=document.querySelector('footer');function check(){f.classList.toggle('visible',window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-10);}window.addEventListener('scroll',check,{passive:true});check();})();</script>
 </body>
 </html>
