@@ -605,147 +605,147 @@ footer.visible { opacity: 1; pointer-events: auto; }
 
 <script>
 // ── EVENT DATA ──
-// To add a new event: add an entry here, then add data-id="your-key" to the card in events.html
+// To add a new event: add an entry here with a dateISO field, then add its card to events.html
 const EVENTS = {
   'oct26': {
     image: 'event-am.avif',
+    dateISO: '2024-10-26',
     date: 'Oct 26',
     time: '11AM – 4PM',
     name: 'Circuit AM',
     artists: ['Sons', 'Sebastian Fabrice', 'Yael', 'Oli', 'Chobe B2B Merchant', 'J Hon'],
     venue: 'Moxy Terrace · 808 N High St, Columbus',
-    posh: 'https://posh.vip/e/circuit-am',
-    past: true
-  },
-  'jan31': {
-    image: 'event-pm.avif',
-    date: 'Jan 31',
-    time: '3PM – 8PM',
-    name: 'Circuit PM',
-    artists: ['Sons', 'Oli B2B Sassy P', 'Sceneamatix', 'Sebastian Fabrice', 'Penthouse'],
-    venue: 'Moxy Terrace · 808 N High St, Columbus',
-    posh: 'https://posh.vip/e/circuitpm',
-    past: true
-  },
-  'feb19': {
-    image: 'event-eviction.avif',
-    date: 'Feb 19',
-    time: '8PM – 2AM',
-    name: 'Eviction Notice',
-    artists: ['Oli', 'Sassy P', 'Flurry', 'Bella Grazia', 'Sebastian Fabrice'],
-    venue: 'Apt. B / Bodega · 1044 N High St, Columbus',
-    posh: 'https://posh.vip/e/eviction-notice-apt-b-1',
-    past: true
-  },
-  'jun5': {
-    image: 'azure-jun5.jpg',
-    date: 'Jun 5',
-    time: '3:00 PM',
-    name: 'Azure Day Party',
-    artists: ['OKAYVAL'],
-    venue: 'Moxy Terrace · Columbus, OH',
-    posh: 'https://posh.vip/e/azure-day-party-columbus-620-wnight-tales-2',
-    past: true
-  },
-  'mar14': {
-    image: 'event-luckedup.avif',
-    date: 'Mar 14',
-    time: '',
-    name: 'Lucked Up',
-    artists: [],
-    venue: 'Columbus, OH',
-    posh: 'https://posh.vip/e/lucked-up-1',
-    past: true
+    posh: 'https://posh.vip/e/circuit-am'
   },
   'jan18': {
     image: 'event-eviction2.avif',
+    dateISO: '2025-01-18',
     date: 'Jan 18',
     time: '8PM – 2AM',
     name: 'Eviction Notice',
     artists: [],
     venue: 'Apt. B / Bodega · 1044 N High St, Columbus',
-    posh: 'https://posh.vip/e/eviction-notice-apt-b',
-    past: true
+    posh: 'https://posh.vip/e/eviction-notice-apt-b'
+  },
+  'jan31': {
+    image: 'event-pm.avif',
+    dateISO: '2025-01-31',
+    date: 'Jan 31',
+    time: '3PM – 8PM',
+    name: 'Circuit PM',
+    artists: ['Sons', 'Oli B2B Sassy P', 'Sceneamatix', 'Sebastian Fabrice', 'Penthouse'],
+    venue: 'Moxy Terrace · 808 N High St, Columbus',
+    posh: 'https://posh.vip/e/circuitpm'
+  },
+  'feb19': {
+    image: 'event-eviction.avif',
+    dateISO: '2025-02-19',
+    date: 'Feb 19',
+    time: '8PM – 2AM',
+    name: 'Eviction Notice',
+    artists: ['Oli', 'Sassy P', 'Flurry', 'Bella Grazia', 'Sebastian Fabrice'],
+    venue: 'Apt. B / Bodega · 1044 N High St, Columbus',
+    posh: 'https://posh.vip/e/eviction-notice-apt-b-1'
+  },
+  'mar14': {
+    image: 'event-luckedup.avif',
+    dateISO: '2025-03-14',
+    date: 'Mar 14',
+    time: '',
+    name: 'Lucked Up',
+    artists: [],
+    venue: 'Columbus, OH',
+    posh: 'https://posh.vip/e/lucked-up-1'
+  },
+  'jun5': {
+    image: 'azure-jun5.jpg',
+    dateISO: '2025-06-05',
+    date: 'Jun 5',
+    time: '3:00 PM',
+    name: 'Azure Day Party',
+    artists: ['OKAYVAL'],
+    venue: 'Moxy Terrace · Columbus, OH',
+    posh: 'https://posh.vip/e/azure-day-party-columbus-620-wnight-tales-2'
   },
   'jun20': {
     image: 'azure-jun20.jpg',
+    dateISO: '2025-06-20',
     date: 'Jun 20',
     time: '3:00 PM',
     name: 'Azure Day Party',
     artists: ['Night Tales', 'Sebastian Fabrice', 'Amor', 'Trill', 'Smothers'],
     venue: 'Moxy Terrace · Columbus, OH',
-    posh: 'https://posh.vip/e/azure-day-party-523-w-night-tales-2',
-    past: false
+    posh: 'https://posh.vip/e/azure-day-party-523-w-night-tales-2'
   },
   'jun27': {
     image: 'azure-jun27.jpg',
+    dateISO: '2025-06-27',
     date: 'Jun 27',
     time: '3:00 PM',
     name: 'Azure Day Party',
     artists: ['TESH', 'Seb Fudala', 'UVA', 'DJ Axcess', 'Must Be Nik', 'Nico PS'],
     venue: 'Moxy Terrace · Columbus, OH',
-    posh: 'https://posh.vip/e/azure-day-party-columbus-627-w-tesh',
-    past: false
+    posh: 'https://posh.vip/e/azure-day-party-columbus-627-w-tesh'
   },
   'jul12': {
     image: 'azure-jul12.jpg',
+    dateISO: '2025-07-12',
     date: 'Jul 12',
     time: '3:00 PM',
     name: 'Azure Day Party',
     artists: ['Bobby Booshay', 'Mike James', 'Tex B2B Vaughn', 'DJ Cale', 'JustaJ'],
     venue: 'Moxy Terrace · Columbus, OH',
-    posh: 'https://posh.vip/e/azure-day-party-columbus-712-wbobby-booshay',
-    past: false
+    posh: 'https://posh.vip/e/azure-day-party-columbus-712-wbobby-booshay'
   },
   'jul25': {
     image: 'azure-jul25.jpg',
+    dateISO: '2025-07-25',
     date: 'Jul 25',
     time: '3:00 PM',
     name: 'Azure Day Party',
     artists: ['Sons', 'Trill', 'Ben Basta', 'Cookies N Kreme', 'Cuzzin'],
     venue: 'Moxy Terrace · Columbus, OH',
-    posh: 'https://posh.vip/e/azure-day-party-columbus-725-wsons',
-    past: false
+    posh: 'https://posh.vip/e/azure-day-party-columbus-725-wsons'
   },
   'aug1': {
     image: 'azure-aug1.jpg',
+    dateISO: '2025-08-01',
     date: 'Aug 1',
     time: '3:00 PM',
     name: 'Azure Day Party',
     artists: ['Gudfella', 'Sceneamatix', 'Juice', 'Mike Dow', 'Sassy P'],
     venue: 'Moxy Terrace · Columbus, OH',
-    posh: 'https://posh.vip/e/azure-day-party-columbus-81-wgudfella-1',
-    past: false
+    posh: 'https://posh.vip/e/azure-day-party-columbus-81-wgudfella-1'
   },
   'aug16': {
     image: 'azure-aug16.jpg',
+    dateISO: '2025-08-16',
     date: 'Aug 16',
     time: '3:00 PM',
     name: 'Azure Day Party',
     artists: ['Rick Wonder', 'Yael', 'Greeves', 'Joe G', 'Jhon'],
     venue: 'Moxy Terrace · Columbus, OH',
-    posh: 'https://posh.vip/e/azure-day-party-columbus-816-lineup-tba',
-    past: false
+    posh: 'https://posh.vip/e/azure-day-party-columbus-816-lineup-tba'
   },
   'aug22': {
     image: 'azure-aug22.jpg',
+    dateISO: '2025-08-22',
     date: 'Aug 22',
     time: '3:00 PM',
     name: 'Azure Day Party',
     artists: ['No Static', 'Behold', 'Tweety', 'Fear & Lowe', 'Tano'],
     venue: 'Moxy Terrace · Columbus, OH',
-    posh: 'https://posh.vip/e/azure-day-party-columbus-822-lineup-tba',
-    past: false
+    posh: 'https://posh.vip/e/azure-day-party-columbus-822-lineup-tba'
   },
   'aug29': {
     image: 'azure-aug29.jpg',
+    dateISO: '2025-08-29',
     date: 'Aug 29',
     time: '3:00 PM',
     name: 'Azure Day Party',
     artists: ['Luke Alexander', 'Sons', 'Nik Ryan', 'Nev', 'Oli B2B Sassy P'],
     venue: 'Moxy Terrace · Columbus, OH',
-    posh: 'https://posh.vip/e/azure-day-party-columbus-718-wambrose-1',
-    past: false
+    posh: 'https://posh.vip/e/azure-day-party-columbus-718-wambrose-1'
   }
 };
 
@@ -780,7 +780,8 @@ if (ev) {
 
   const cta = document.getElementById('eventCta');
   cta.href = ev.posh;
-  if (ev.past) {
+  const isPast = ev.dateISO && new Date(ev.dateISO) < new Date();
+  if (isPast) {
     cta.textContent = 'View Event';
     cta.classList.add('past');
   } else {
