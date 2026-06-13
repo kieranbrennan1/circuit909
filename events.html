@@ -972,6 +972,11 @@ document.getElementById('ticketsBtn').addEventListener('click', (e) => {
   document.getElementById('ticketsUserSub').textContent = currentUser.email;
   ticketsOverlay.classList.add('open');
 });
+
+// Posh links — add data-href="https://posh.vip/e/..." to any event card div to make it clickable
+document.querySelectorAll('.event-card[data-href]').forEach(card => {
+  card.addEventListener('click', () => window.open(card.dataset.href, '_blank'));
+});
 </script>
 </body>
 </html>
