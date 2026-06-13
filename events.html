@@ -854,15 +854,26 @@ function initShowMore(grid) {
   const cards = Array.from(grid.querySelectorAll('.event-card'));
   if (cards.length <= 6) return;
   const extra = cards.slice(6);
-  extra.forEach(c => { c.style.display = 'none'; revealObs.unobserve(c); });
-  const btn = document.createElement('button');
-  btn.className = 'show-more-btn';
-  btn.textContent = 'Show More';
-  grid.after(btn);
-  btn.addEventListener('click', () => {
+
+  function collapse() {
+    extra.forEach(c => { c.style.display = 'none'; revealObs.unobserve(c); });
+    const moreBtn = document.createElement('button');
+    moreBtn.className = 'show-more-btn';
+    moreBtn.textContent = 'Show More';
+    grid.after(moreBtn);
+    moreBtn.addEventListener('click', () => { moreBtn.remove(); expand(); });
+  }
+
+  function expand() {
     extra.forEach(c => { c.style.display = ''; requestAnimationFrame(() => revealObs.observe(c)); });
-    btn.remove();
-  });
+    const lessBtn = document.createElement('button');
+    lessBtn.className = 'show-more-btn';
+    lessBtn.textContent = 'Show Less';
+    grid.after(lessBtn);
+    lessBtn.addEventListener('click', () => { lessBtn.remove(); collapse(); });
+  }
+
+  collapse();
 }
 document.querySelectorAll('.events-grid').forEach(initShowMore);
 
