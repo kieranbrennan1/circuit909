@@ -667,24 +667,6 @@ section.content {
   display: block;
   border: 1px solid rgba(255,255,255,0.08);
 }
-.lightbox-close {
-  position: absolute;
-  top: 1.4rem;
-  left: 1.4rem;
-  background: none;
-  border: 1px solid rgba(255,255,255,0.3);
-  color: #fff;
-  font-size: 1.1rem;
-  line-height: 1;
-  width: 2.2rem;
-  height: 2.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
-}
-.lightbox-close:hover { border-color: #fff; color: #fff; }
 
 /* ── ABOUT ── */
 #about {
@@ -1722,14 +1704,12 @@ document.getElementById('ticketsBtn').addEventListener('click', (e) => {
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose">&times;</button>
   <img id="lightboxImg" src="" alt="">
 </div>
 <script>
 (function(){
   var lb=document.getElementById('lightbox');
   var lbImg=document.getElementById('lightboxImg');
-  document.getElementById('lightboxClose').addEventListener('click',function(){lb.classList.remove('active');});
   lb.addEventListener('click',function(e){if(e.target===lb)lb.classList.remove('active');});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('active');});
   document.getElementById('galleryTrack').addEventListener('click',function(e){
