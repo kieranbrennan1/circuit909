@@ -431,15 +431,16 @@ section.content {
 }
 
 footer {
-  position: relative;
-  z-index: 1;
-  padding: 2rem 3rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .footer-copy {
@@ -464,8 +465,7 @@ footer {
 
 .footer-social a:hover { color: rgba(255,255,255,0.7); }
 .footer-social svg { width: 18px; height: 18px; fill: currentColor; }
-.page-bottom-logo { display: flex; justify-content: center; align-items: center; padding: 4rem 2rem 2rem; }
-.page-bottom-logo img { height: 120px; width: auto; display: block; }
+.footer-logo { position: absolute; left: 50%; transform: translateX(-50%); height: 40px; width: auto; }
 
 @media (max-width: 900px) {
   nav { padding: 1.2rem 1.5rem; }
@@ -475,7 +475,15 @@ footer {
   .page-header { padding: 8rem 1.5rem 3rem; }
 }
 
+.nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; flex-shrink: 0; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.8); border-radius: 1px; }
+.mobile-menu { display: none; position: fixed; top: 90px; left: 0; right: 0; background: rgba(0,0,0,0.97); z-index: 99; flex-direction: column; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.mobile-menu a { font-family: 'Lato', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.65); text-decoration: none; padding: 1.2rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.06); display: block; transition: color 0.2s; }
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover, .mobile-menu a.active { color: #fff; }
 @media (max-width: 600px) {
+  .nav-hamburger { display: flex; }
+  .mobile-menu.open { display: flex; }
   .nav-center { display: none; }
   footer { flex-direction: column; text-align: center; }
 }
@@ -484,6 +492,7 @@ footer {
 <body>
 
 <nav>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   <a class="nav-brand" href="index.html">
     <img src="logo.png" alt="Circuit 909">
   </a>
@@ -512,6 +521,12 @@ footer {
     </a>
   </div>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="events.html">Events</a>
+  <a href="about.html" class="active">About</a>
+  <a href="contact.html">Contact</a>
+</div>
+<script>(function(){var b=document.getElementById('navHamburger'),m=document.getElementById('mobileMenu');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
 
 <div class="page-header">
   <div class="page-header-inner">
@@ -556,12 +571,9 @@ footer {
   </div>
 </section>
 
-<div class="page-bottom-logo">
-  <img src="logo.png" alt="Circuit 909">
-</div>
-
 <footer>
   <p class="footer-copy">&copy; 2026 Circuit 909</p>
+  <img src="logo.png" alt="Circuit 909" class="footer-logo">
   <div class="footer-social">
     <a href="https://www.instagram.com/circuit909presents" target="_blank" rel="noopener" aria-label="Instagram">
       <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
