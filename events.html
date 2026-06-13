@@ -672,40 +672,6 @@ footer.visible { opacity: 1; pointer-events: auto; }
   </div>
 </section>
 
-<script>
-(function(){
-  var EVTS=[
-    {id:'oct26',image:'event-am.avif',dateISO:'2024-10-26',date:'Oct 26',time:'11AM – 4PM',name:'Circuit AM',artists:'Sons \xb7 Sebastian Fabrice \xb7 Yael \xb7 Oli \xb7 Chobe B2B Merchant \xb7 J Hon',venue:'Moxy Terrace \xb7 808 N High St, Columbus'},
-    {id:'jan18',image:'event-eviction2.avif',dateISO:'2025-01-18',date:'Jan 18',time:'8PM – 2AM',name:'Eviction Notice',artists:'',venue:'Apt. B / Bodega \xb7 1044 N High St, Columbus'},
-    {id:'jan31',image:'event-pm.avif',dateISO:'2025-01-31',date:'Jan 31',time:'3PM – 8PM',name:'Circuit PM',artists:'Sons \xb7 Oli B2B Sassy P \xb7 Sceneamatix \xb7 Sebastian Fabrice \xb7 Penthouse',venue:'Moxy Terrace \xb7 808 N High St, Columbus'},
-    {id:'feb19',image:'event-eviction.avif',dateISO:'2025-02-19',date:'Feb 19',time:'8PM – 2AM',name:'Eviction Notice',artists:'Oli \xb7 Sassy P \xb7 Flurry \xb7 Bella Grazia \xb7 Sebastian Fabrice',venue:'Apt. B / Bodega \xb7 1044 N High St, Columbus'},
-    {id:'mar14',image:'event-luckedup.avif',dateISO:'2025-03-14',date:'Mar 14',time:'',name:'Lucked Up',artists:'',venue:'Columbus, OH'},
-    {id:'jun5',image:'azure-jun5.jpg',dateISO:'2025-06-05',date:'Jun 5',time:'3:00 PM',name:'Azure Day Party',artists:'OKAYVAL',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
-    {id:'jun20',image:'azure-jun20.jpg',dateISO:'2025-06-20',date:'Jun 20',time:'3:00 PM',name:'Azure Day Party',artists:'Night Tales \xb7 Sebastian Fabrice \xb7 Amor \xb7 Trill \xb7 Smothers',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
-    {id:'jun27',image:'azure-jun27.jpg',dateISO:'2025-06-27',date:'Jun 27',time:'3:00 PM',name:'Azure Day Party',artists:'TESH \xb7 Seb Fudala \xb7 UVA \xb7 DJ Axcess \xb7 Must Be Nik \xb7 Nico PS',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
-    {id:'jul12',image:'azure-jul12.jpg',dateISO:'2025-07-12',date:'Jul 12',time:'3:00 PM',name:'Azure Day Party',artists:'Bobby Booshay \xb7 Mike James \xb7 Tex B2B Vaughn \xb7 DJ Cale \xb7 JustaJ',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
-    {id:'jul25',image:'azure-jul25.jpg',dateISO:'2025-07-25',date:'Jul 25',time:'3:00 PM',name:'Azure Day Party',artists:'Sons \xb7 Trill \xb7 Ben Basta \xb7 Cookies N Kreme \xb7 Cuzzin',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
-    {id:'aug1',image:'azure-aug1.jpg',dateISO:'2025-08-01',date:'Aug 1',time:'3:00 PM',name:'Azure Day Party',artists:'Gudfella \xb7 Sceneamatix \xb7 Juice \xb7 Mike Dow \xb7 Sassy P',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
-    {id:'aug16',image:'azure-aug16.jpg',dateISO:'2025-08-16',date:'Aug 16',time:'3:00 PM',name:'Azure Day Party',artists:'Rick Wonder \xb7 Yael \xb7 Greeves \xb7 Joe G \xb7 Jhon',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
-    {id:'aug22',image:'azure-aug22.jpg',dateISO:'2025-08-22',date:'Aug 22',time:'3:00 PM',name:'Azure Day Party',artists:'No Static \xb7 Behold \xb7 Tweety \xb7 Fear &amp; Lowe \xb7 Tano',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
-    {id:'aug29',image:'azure-aug29.jpg',dateISO:'2025-08-29',date:'Aug 29',time:'3:00 PM',name:'Azure Day Party',artists:'Luke Alexander \xb7 Sons \xb7 Nik Ryan \xb7 Nev \xb7 Oli B2B Sassy P',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'}
-  ];
-  var today=new Date();today.setHours(0,0,0,0);
-  var past=EVTS.filter(function(e){return new Date(e.dateISO)<today;}).sort(function(a,b){return a.dateISO>b.dateISO?-1:1;});
-  var upcoming=EVTS.filter(function(e){return new Date(e.dateISO)>=today;}).sort(function(a,b){return a.dateISO<b.dateISO?-1:1;});
-  var delays=[0,0.1,0.2];
-  function card(ev,i){
-    var bg='background-image:url(\''+ev.image+'\');';
-    if(ev.bgPos)bg+='background-size:cover;background-position:'+ev.bgPos+';';
-    var d=delays[i%3];var ds=d?' style="transition-delay:'+d+'s"':'';
-    var dt=ev.date+(ev.time?'  \xb7  '+ev.time:'');
-    var art=ev.artists?'<p class="event-artists">'+ev.artists+'</p>':'';
-    return '<div class="event-card" data-id="'+ev.id+'" data-observe'+ds+'><div class="event-card-bg" style="'+bg+'"></div><div class="event-card-overlay"></div><div class="event-card-info"><p class="event-date">'+dt+'</p><h3 class="event-name">'+ev.name+'</h3>'+art+'<p class="event-venue">'+ev.venue+'</p></div></div>';
-  }
-  document.getElementById('upcomingGrid').innerHTML=upcoming.map(card).join('');
-  document.getElementById('pastGrid').innerHTML=past.map(card).join('');
-})();
-</script>
 <!-- Footer -->
 <footer>
   <p class="footer-copy">&copy; 2026 Circuit 909</p>
@@ -766,7 +732,40 @@ const revealObs = new IntersectionObserver((entries) => {
     if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
   });
 }, { threshold: 0.12 });
-document.querySelectorAll('[data-observe]').forEach(el => revealObs.observe(el));
+// Render and sort events by date
+(function(){
+  var EVTS=[
+    {id:'oct26',image:'event-am.avif',dateISO:'2024-10-26',date:'Oct 26',time:'11AM – 4PM',name:'Circuit AM',artists:'Sons \xb7 Sebastian Fabrice \xb7 Yael \xb7 Oli \xb7 Chobe B2B Merchant \xb7 J Hon',venue:'Moxy Terrace \xb7 808 N High St, Columbus'},
+    {id:'jan18',image:'event-eviction2.avif',dateISO:'2025-01-18',date:'Jan 18',time:'8PM – 2AM',name:'Eviction Notice',artists:'',venue:'Apt. B / Bodega \xb7 1044 N High St, Columbus'},
+    {id:'jan31',image:'event-pm.avif',dateISO:'2025-01-31',date:'Jan 31',time:'3PM – 8PM',name:'Circuit PM',artists:'Sons \xb7 Oli B2B Sassy P \xb7 Sceneamatix \xb7 Sebastian Fabrice \xb7 Penthouse',venue:'Moxy Terrace \xb7 808 N High St, Columbus'},
+    {id:'feb19',image:'event-eviction.avif',dateISO:'2025-02-19',date:'Feb 19',time:'8PM – 2AM',name:'Eviction Notice',artists:'Oli \xb7 Sassy P \xb7 Flurry \xb7 Bella Grazia \xb7 Sebastian Fabrice',venue:'Apt. B / Bodega \xb7 1044 N High St, Columbus'},
+    {id:'mar14',image:'event-luckedup.avif',dateISO:'2025-03-14',date:'Mar 14',time:'',name:'Lucked Up',artists:'',venue:'Columbus, OH'},
+    {id:'jun5',image:'azure-jun5.jpg',dateISO:'2025-06-05',date:'Jun 5',time:'3:00 PM',name:'Azure Day Party',artists:'OKAYVAL',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
+    {id:'jun20',image:'azure-jun20.jpg',dateISO:'2025-06-20',date:'Jun 20',time:'3:00 PM',name:'Azure Day Party',artists:'Night Tales \xb7 Sebastian Fabrice \xb7 Amor \xb7 Trill \xb7 Smothers',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
+    {id:'jun27',image:'azure-jun27.jpg',dateISO:'2025-06-27',date:'Jun 27',time:'3:00 PM',name:'Azure Day Party',artists:'TESH \xb7 Seb Fudala \xb7 UVA \xb7 DJ Axcess \xb7 Must Be Nik \xb7 Nico PS',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
+    {id:'jul12',image:'azure-jul12.jpg',dateISO:'2025-07-12',date:'Jul 12',time:'3:00 PM',name:'Azure Day Party',artists:'Bobby Booshay \xb7 Mike James \xb7 Tex B2B Vaughn \xb7 DJ Cale \xb7 JustaJ',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
+    {id:'jul25',image:'azure-jul25.jpg',dateISO:'2025-07-25',date:'Jul 25',time:'3:00 PM',name:'Azure Day Party',artists:'Sons \xb7 Trill \xb7 Ben Basta \xb7 Cookies N Kreme \xb7 Cuzzin',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
+    {id:'aug1',image:'azure-aug1.jpg',dateISO:'2025-08-01',date:'Aug 1',time:'3:00 PM',name:'Azure Day Party',artists:'Gudfella \xb7 Sceneamatix \xb7 Juice \xb7 Mike Dow \xb7 Sassy P',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
+    {id:'aug16',image:'azure-aug16.jpg',dateISO:'2025-08-16',date:'Aug 16',time:'3:00 PM',name:'Azure Day Party',artists:'Rick Wonder \xb7 Yael \xb7 Greeves \xb7 Joe G \xb7 Jhon',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
+    {id:'aug22',image:'azure-aug22.jpg',dateISO:'2025-08-22',date:'Aug 22',time:'3:00 PM',name:'Azure Day Party',artists:'No Static \xb7 Behold \xb7 Tweety \xb7 Fear &amp; Lowe \xb7 Tano',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'},
+    {id:'aug29',image:'azure-aug29.jpg',dateISO:'2025-08-29',date:'Aug 29',time:'3:00 PM',name:'Azure Day Party',artists:'Luke Alexander \xb7 Sons \xb7 Nik Ryan \xb7 Nev \xb7 Oli B2B Sassy P',venue:'Moxy Terrace \xb7 Columbus, OH',bgPos:'center top'}
+  ];
+  var today=new Date();today.setHours(0,0,0,0);
+  var past=EVTS.filter(function(e){return new Date(e.dateISO)<today;}).sort(function(a,b){return a.dateISO>b.dateISO?-1:1;});
+  var upcoming=EVTS.filter(function(e){return new Date(e.dateISO)>=today;}).sort(function(a,b){return a.dateISO<b.dateISO?-1:1;});
+  var delays=[0,0.1,0.2];
+  function makeCard(ev,i){
+    var bg='background-image:url(\''+ev.image+'\');';
+    if(ev.bgPos)bg+='background-size:cover;background-position:'+ev.bgPos+';';
+    var d=delays[i%3];var ds=d?' style="transition-delay:'+d+'s"':'';
+    var dt=ev.date+(ev.time?' \xb7 '+ev.time:'');
+    var art=ev.artists?'<p class="event-artists">'+ev.artists+'</p>':'';
+    return '<div class="event-card" data-id="'+ev.id+'" data-observe'+ds+'><div class="event-card-bg" style="'+bg+'"></div><div class="event-card-overlay"></div><div class="event-card-info"><p class="event-date">'+dt+'</p><h3 class="event-name">'+ev.name+'</h3>'+art+'<p class="event-venue">'+ev.venue+'</p></div></div>';
+  }
+  document.getElementById('upcomingGrid').innerHTML=upcoming.map(makeCard).join('');
+  document.getElementById('pastGrid').innerHTML=past.map(makeCard).join('');
+  document.querySelectorAll('#upcomingGrid [data-observe], #pastGrid [data-observe]').forEach(function(el){revealObs.observe(el);});
+})();
 
 // Show more
 function initShowMore(grid) {
