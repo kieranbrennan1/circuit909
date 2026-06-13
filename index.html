@@ -618,6 +618,33 @@ section.content {
 .event-card-overlay { z-index: 2; }
 .event-card-info { z-index: 3; }
 
+/* ── PHOTO GALLERY ── */
+.gallery-strip {
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 4.5rem;
+}
+.gallery-track {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  animation: gallery-scroll 42s linear infinite;
+}
+.gallery-strip:hover .gallery-track {
+  animation-play-state: paused;
+}
+.gallery-track img {
+  height: 460px;
+  width: auto;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+}
+@keyframes gallery-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* ── ABOUT ── */
 #about {
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -713,15 +740,16 @@ section.content {
 
 /* ── FOOTER ── */
 footer {
-  position: relative;
-  z-index: 1;
-  padding: 2rem 3rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .footer-copy {
@@ -746,8 +774,7 @@ footer {
 
 .footer-social a:hover { color: rgba(255,255,255,0.7); }
 .footer-social svg { width: 18px; height: 18px; fill: currentColor; }
-.page-bottom-logo { display: flex; justify-content: center; align-items: center; padding: 4rem 2rem 2rem; }
-.page-bottom-logo img { height: 120px; width: auto; display: block; }
+.footer-logo { position: absolute; left: 50%; transform: translateX(-50%); height: 40px; width: auto; }
 
 /* ── SMS SIGNUP ── */
 .sms-section {
@@ -981,63 +1008,33 @@ footer {
   </div>
 </section>
 
-<!-- Events -->
+<!-- Events Gallery -->
 <section id="events" class="content">
   <div class="section-inner">
     <div class="events-header">
       <div class="events-header-left">
         <p class="section-label">Circuit 909 Presents</p>
-        <h2 class="section-heading">Past Events</h2>
+        <h2 class="section-heading">The Experience</h2>
       </div>
       <a href="events.html" class="btn-outline">See All Events</a>
     </div>
-
-    <div class="events-grid">
-
-      <div class="event-card ec-1" data-observe>
-        <div class="event-card-bg"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Oct 26 &nbsp;·&nbsp; 11AM – 4PM</p>
-          <h3 class="event-name">Circuit AM</h3>
-          <p class="event-artists">Sons · Sebastian Fabrice · Yael · Oli<br>Chobe B2B Merchant · J Hon</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; 808 N High St, Columbus</p>
-        </div>
-      </div>
-
-      <div class="event-card ec-2" data-observe style="transition-delay:0.1s">
-        <div class="event-card-bg"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Jan 31 &nbsp;·&nbsp; 3PM – 8PM</p>
-          <h3 class="event-name">Circuit PM</h3>
-          <p class="event-artists">Sons · Oli B2B Sassy P · Sceneamatix<br>Sebastian Fabrice · Penthouse</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; 808 N High St, Columbus</p>
-        </div>
-      </div>
-
-      <div class="event-card ec-4" data-observe style="transition-delay:0.2s">
-        <div class="event-card-bg"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Feb 19 &nbsp;·&nbsp; 8PM – 2AM</p>
-          <h3 class="event-name">Eviction Notice</h3>
-          <p class="event-artists">Oli · Sassy P · Flurry<br>Bella Grazia · Sebastian Fabrice</p>
-          <p class="event-venue">Apt. B / Bodega &nbsp;·&nbsp; 1044 N High St, Columbus</p>
-        </div>
-      </div>
-
-      <div class="event-card" data-observe style="transition-delay:0.3s">
-        <div class="event-card-bg" style="background-image: url('azure-jun5.jpg'); background-size: cover; background-position: center top;"></div>
-        <div class="event-card-overlay"></div>
-        <div class="event-card-info">
-          <p class="event-date">Jun 5 &nbsp;·&nbsp; 3:00 PM</p>
-          <h3 class="event-name">Azure Day Party</h3>
-          <p class="event-artists">OKAYVAL</p>
-          <p class="event-venue">Moxy Terrace &nbsp;·&nbsp; Columbus, OH</p>
-        </div>
-      </div>
-
+  </div>
+  <div class="gallery-strip">
+    <div class="gallery-track">
+      <img src="gallery-1.jpg" alt="Circuit 909 Event">
+      <img src="gallery-2.jpg" alt="Circuit 909 Event">
+      <img src="gallery-3.jpg" alt="Circuit 909 Event">
+      <img src="gallery-4.jpg" alt="Circuit 909 Event">
+      <img src="gallery-5.jpg" alt="Circuit 909 Event">
+      <img src="gallery-6.jpg" alt="Circuit 909 Event">
+      <img src="gallery-7.jpg" alt="Circuit 909 Event">
+      <img src="gallery-1.jpg" alt="Circuit 909 Event">
+      <img src="gallery-2.jpg" alt="Circuit 909 Event">
+      <img src="gallery-3.jpg" alt="Circuit 909 Event">
+      <img src="gallery-4.jpg" alt="Circuit 909 Event">
+      <img src="gallery-5.jpg" alt="Circuit 909 Event">
+      <img src="gallery-6.jpg" alt="Circuit 909 Event">
+      <img src="gallery-7.jpg" alt="Circuit 909 Event">
     </div>
   </div>
 </section>
@@ -1305,12 +1302,10 @@ footer {
     <p class="sms-disclaimer">By submitting you agree to receive text messages from Circuit 909. Reply STOP to opt out.</p>
   </div>
 </section>
-<div class="page-bottom-logo">
-  <img src="logo.png" alt="Circuit 909">
-</div>
 <!-- Footer -->
 <footer>
   <p class="footer-copy">&copy; 2026 Circuit 909</p>
+  <img src="logo.png" alt="Circuit 909" class="footer-logo">
   <div class="footer-social">
     <a href="https://www.instagram.com/circuit909presents" target="_blank" rel="noopener" aria-label="Instagram">
       <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
