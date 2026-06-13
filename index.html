@@ -123,9 +123,9 @@ nav {
 
 /* ── PROFILE DROPDOWN ── */
 .profile-dropdown {
-  position: absolute;
-  top: calc(100% + 0.6rem);
-  right: 0;
+  position: fixed;
+  top: 70px;
+  right: 1.5rem;
   background: #111;
   border: 1px solid rgba(255,255,255,0.15);
   min-width: 170px;
@@ -975,9 +975,8 @@ footer.visible { opacity: 1; pointer-events: auto; }
   nav.menu-open { background: #000; }
   .nav-center { display: none; }
   .nav-brand { position: absolute; left: 50%; transform: translateX(-50%); }
-  .nav-profile-btn svg { width: 13px; height: 13px; }
-  .nav-social svg { width: 15px; height: 15px; }
-  .nav-profile-btn { padding: 0.3rem 0.6rem; }
+  .nav-profile-btn { display: none; }
+  .nav-social { display: none; }
   .gallery-track { animation-duration: 22s; }
   .logo-coin { width: 88vw; }
   .events-grid { grid-template-columns: 1fr; }
@@ -1001,19 +1000,10 @@ footer.visible { opacity: 1; pointer-events: auto; }
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <!-- Welcome text -->
     <span class="nav-welcome" id="navWelcome" style="display:none"></span>
-    <!-- Profile -->
-    <div style="position:relative">
-      <button class="nav-profile-btn" id="profileBtn" aria-label="Account">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-      </button>
-      <div class="profile-dropdown" id="profileDropdown">
-        <div class="profile-dropdown-name" id="profileName"></div>
-        <a href="#" id="ticketsBtn">My Tickets</a>
-        <button id="logoutBtn">Sign Out</button>
-      </div>
-    </div>
+    <button class="nav-profile-btn" id="profileBtn" aria-label="Account">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+    </button>
     <!-- Instagram -->
     <a href="https://www.instagram.com/circuit909presents" target="_blank" rel="noopener" class="nav-social" aria-label="Instagram">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1028,12 +1018,18 @@ footer.visible { opacity: 1; pointer-events: auto; }
     </a>
   </div>
 </nav>
+<div class="profile-dropdown" id="profileDropdown">
+  <div class="profile-dropdown-name" id="profileName"></div>
+  <a href="#" id="ticketsBtn">My Tickets</a>
+  <button id="logoutBtn">Sign Out</button>
+</div>
 <div class="mobile-menu" id="mobileMenu">
   <a href="events.html">Events</a>
   <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
+  <a href="#" id="profileMenuLink">Account</a>
 </div>
-<script>(function(){var b=document.getElementById('navHamburger'),m=document.getElementById('mobileMenu'),n=document.querySelector('nav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');if(n)n.classList.toggle('menu-open');});})();</script>
+<script>(function(){var b=document.getElementById('navHamburger'),m=document.getElementById('mobileMenu'),n=document.querySelector('nav'),p=document.getElementById('profileMenuLink');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');if(n)n.classList.toggle('menu-open');});if(p)p.addEventListener('click',function(e){e.preventDefault();m.classList.remove('open');if(n)n.classList.remove('menu-open');document.getElementById('profileBtn').click();});})();</script>
 
 <!-- Hero -->
 <section class="hero">
