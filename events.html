@@ -614,36 +614,7 @@ const revealObs = new IntersectionObserver((entries) => {
     if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
   });
 }, { threshold: 0.12 });
-// Sort events into upcoming / past based on data-datetime vs now
-(function(){
-  var now = new Date();
-  var upcomingGrid = document.getElementById('upcomingGrid');
-  var pastGrid = document.getElementById('pastGrid');
-  var all = Array.from(document.querySelectorAll('.event-card[data-datetime]'));
-  var future = [], gone = [];
-  all.forEach(function(c){
-    var d = new Date(c.dataset.datetime);
-    (d > now ? future : gone).push({c:c, d:d});
-  });
-  // Upcoming: soonest first
-  future.sort(function(a,b){return a.d-b.d;});
-  // Past: most recent first
-  gone.sort(function(a,b){return b.d-a.d;});
-  upcomingGrid.innerHTML = '';
-  pastGrid.innerHTML = '';
-  future.forEach(function(o,i){
-    o.c.style.transitionDelay=(i%3*0.1)+'s';
-    o.c.classList.remove('visible');
-    upcomingGrid.appendChild(o.c);
-    revealObs.observe(o.c);
-  });
-  gone.forEach(function(o,i){
-    o.c.style.transitionDelay=(i%3*0.1)+'s';
-    o.c.classList.remove('visible');
-    pastGrid.appendChild(o.c);
-    revealObs.observe(o.c);
-  });
-})();
+document.querySelectorAll('[data-observe]').forEach(el => revealObs.observe(el));
 
 // Show more
 function initShowMore(grid) {
